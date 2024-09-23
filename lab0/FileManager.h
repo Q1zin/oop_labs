@@ -5,19 +5,15 @@
 #include <string>
 #include <list>
 
-using namespace std;
-
 class FileManager {
 private:
-    ifstream inputFile{nullptr};
-    ofstream outputFile{nullptr};
+    std::ifstream inputFile{nullptr};
+    std::ofstream outputFile{nullptr};
 public:
-    bool openInputFile(const string& filePath);
-    bool openOutputFile(const string& filePath);
-    bool readLine(string& line);
-    void writeCSV(const list<pair<string, int>>& sortedWords, int totalWords);
+    bool openInputFile(const std::string& filePath);
+    bool openOutputFile(const std::string& filePath);
+    bool readLine(std::string& line, bool& err);
+    void writeCSV(const std::list<std::pair<std::string, int>>& sortedWords, int totalWords);
 };
-
-
 
 #endif //FILEMANAGER_H

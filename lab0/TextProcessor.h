@@ -4,16 +4,9 @@
 #include <string>
 #include <list>
 
-using namespace std;
-
 class TextProcessor {
-private:
-    static string str_tolower(string s);
 public:
-    static string removePunctuation(const string& text);
-    static list<string> split(const string& text, char sep);
+    static std::list<std::string> splitWords(const std::string& text);
 };
-
-
 
 #endif //TEXTPROCESSOR_H

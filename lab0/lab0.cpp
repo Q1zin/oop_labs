@@ -4,30 +4,34 @@
 #include "FileManager.h"
 #include "WordCounter.h"
 
-using namespace std;
-
 int main(int argc, char* argv[]) {
     if (argc != 3) {
-        cerr << "Error: invalid number of arguments" << endl;
+        std::cerr << "Error: invalid number of arguments" << std::endl;
         return 1;
     }
 
     FileManager fileManager;
     if (!fileManager.openInputFile(argv[1])) {
-        cerr << "Error: can't open file " << argv[1] << endl;
-        return 1;
+        std::cerr << "Error: can't open file " << argv[1] << std::endl;
+        return 2;
     }
 
     WordCounter wordCounter;
-    string line;
+    std::string line;
+    bool errReadFile = false;
 
-    while (fileManager.readLine(line)) {
+    while (fileManager.readLine(line, errReadFile)) {
         wordCounter.processLine(line);
     }
 
+    if (errReadFile) {
+        std::cerr << "Error: can't read line in file" << std::endl;
+        return 3;
+    }
+
     if (!fileManager.openOutputFile(argv[2])) {
-        cerr << "Error: can't open file " << argv[2] << endl;
-        return 1;
+        std::cerr << "Error: can't open file " << argv[2] << std::endl;
+        return 4;
     }
 
     fileManager.writeCSV(wordCounter.getSortedWords(), wordCounter.getTotalWords());

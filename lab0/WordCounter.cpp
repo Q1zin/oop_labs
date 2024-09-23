@@ -1,29 +1,25 @@
 #include <string>
 #include <list>
 #include <map>
+
 #include "WordCounter.h"
 #include "TextProcessor.h"
 
-using namespace std;
-
-void WordCounter::addWords(const list<string>& words) {
+void WordCounter::addWords(const std::list<std::string>& words) {
     for (const auto& word : words) {
         ++wordCount[word];
         ++totalWords;
     }
 }
 
-void WordCounter::processLine(string& line) {
-    list<string> words = TextProcessor::split(TextProcessor::removePunctuation(line), ' ');
-    for (const auto& word : words) {
-        ++wordCount[word];
-        ++totalWords;
-    }
+void WordCounter::processLine(std::string& line) {
+    std::list<std::string> words = TextProcessor::splitWords(line);
+    addWords(words);
 }
 
-list<pair<string, int>> WordCounter::getSortedWords() {
-    list<pair<string, int>> sortedWords(wordCount.begin(), wordCount.end());
-    sortedWords.sort([](const pair<string, int> &a, const pair<string, int> &b) {
+std::list<std::pair<std::string, int>> WordCounter::getSortedWords() {
+    std::list<std::pair<std::string, int>> sortedWords(wordCount.begin(), wordCount.end());
+    sortedWords.sort([](const std::pair<std::string, int> &a, const std::pair<std::string, int> &b) {
         return b.second < a.second;
     });
     return sortedWords;

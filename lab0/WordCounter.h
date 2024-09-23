@@ -5,16 +5,14 @@
 #include <list>
 #include <map>
 
-using namespace std;
-
 class WordCounter {
 private:
-    map<string, int> wordCount{};
+    std::map<std::string, int> wordCount{};
     int totalWords{0};
 public:
-    void addWords(const list<string>& words);
-    void processLine(string& line);
-    list<pair<string, int>> getSortedWords();
+    void addWords(const std::list<std::string>& words);
+    void processLine(std::string& line);
+    std::list<std::pair<std::string, int>> getSortedWords();
     int getTotalWords() const;
 };
 
