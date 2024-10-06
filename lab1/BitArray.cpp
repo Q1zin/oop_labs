@@ -2,35 +2,13 @@
 
 static constexpr int BITS_PER_LONG = sizeof(unsigned long) * 8;
 
-void printBitInNum(unsigned long n) { // TODO: delete this method
-    for (int i = 0; i < BITS_PER_LONG; i++) {
-        if (n & (1UL << i)) {
-            std::cout << '1';
-        } else {
-            std::cout << '0';
-        }
-    }
-    std::cout << "\n";
-}
-
-void BitArray::printDataBit() { // TODO: delete this method
-    for (auto n : data) {
-        for (int i = 0; i < BITS_PER_LONG; i++) {
-            if (n & (1UL << i)) {
-                std::cout << '1';
-            } else {
-                std::cout << '0';
-            }
-        }
-        std::cout << " ";
-    }
-    std::cout << "(" << this->data[0] << ")\n";
-}
-
 BitArray::BitArray() : num_bits(0) {}
 BitArray::~BitArray() = default;
 
-BitArray::BitArray(int num_bits, unsigned long value) {
+BitArray::BitArray(int num_bits, unsigned long value) {  
+    if (num_bits < 0) 
+        throw std::invalid_argument("Size must be non-negative"); 
+
     this->num_bits = num_bits;
     data.resize((num_bits + BITS_PER_LONG - 1) / BITS_PER_LONG, 0);
     if (num_bits > 0 && !data.empty())
@@ -57,23 +35,23 @@ BitArray& BitArray::operator=(const BitArray& b) {
 }
 
 void BitArray::resize(int new_size, bool value) {
-    if (new_size < 0)
-        throw std::invalid_argument("New size must be non-negative");
+    if (new_size < 0) 
+        throw std::invalid_argument("New size must be non-negative"); 
 
-    int new_data_size = (new_size + BITS_PER_LONG - 1) / BITS_PER_LONG;
+    int new_data_size = (new_size + BITS_PER_LONG - 1) / BITS_PER_LONG; 
 
-    if (new_size < num_bits) {
-        data.resize(new_data_size);
-        if (new_size % BITS_PER_LONG != 0)
-            data.back() &= (1UL << (new_size % BITS_PER_LONG)) - 1;
-    } else if (new_size > num_bits) {
-        data.resize(new_data_size, value ? ~0UL : 0UL);
+    if (new_size < num_bits) { 
+        data.resize(new_data_size); 
+        if (new_size % BITS_PER_LONG != 0) 
+            data.back() &= (1UL << (new_size % BITS_PER_LONG)) - 1; 
+    } else if (new_size > num_bits) {  
+        data.resize(new_data_size, value ? ~0UL : 0UL);  
 
         if (num_bits % BITS_PER_LONG != 0 && value)
             data[data.size() - 1] |= (~0UL << (num_bits % BITS_PER_LONG));
 
-        if (new_size % BITS_PER_LONG != 0)
-            data.back() &= (1UL << (new_size % BITS_PER_LONG)) - 1;
+        if (new_size % BITS_PER_LONG != 0)  
+            data.back() &= (1UL << (new_size % BITS_PER_LONG)) - 1;  
     }
 
     num_bits = new_size;
@@ -89,25 +67,25 @@ void BitArray::clear() {
     data.clear();
 }
 
-BitArray& BitArray::set(int n, bool val) {
-    if (n >= num_bits)
-        throw std::out_of_range("Bit index out of range");
+BitArray& BitArray::set(int n, bool val) { 
+    if (n >= num_bits) 
+        throw std::out_of_range("Bit index out of range"); 
 
-    if (val)
-        data[n / BITS_PER_LONG] |= (1UL << (n % BITS_PER_LONG));
-    else 
-        data[n / BITS_PER_LONG] &= ~(1UL << (n % BITS_PER_LONG));
+    if (val) 
+        data[n / BITS_PER_LONG] |= (1UL << (n % BITS_PER_LONG)); 
+    else  
+        data[n / BITS_PER_LONG] &= ~(1UL << (n % BITS_PER_LONG)); 
 
-    return *this;
+    return *this; 
 };
 
-BitArray& BitArray::set() {
-    for (auto& block : data)
-        block = -1;
+BitArray& BitArray::set() { 
+    for (auto& block : data) 
+        block = -1; 
 
-    data[num_bits / BITS_PER_LONG] >>= BITS_PER_LONG - (num_bits % BITS_PER_LONG);
+    data[num_bits / BITS_PER_LONG] >>= BITS_PER_LONG - (num_bits % BITS_PER_LONG); 
 
-    return *this;
+    return *this; 
 };
 
 
@@ -136,18 +114,14 @@ bool BitArray::any() const {
 }
 
 bool BitArray::none() const {
-    for (const auto& block : data)
-        if (block != 0)
-            return false;
-
-    return true;
+    return !any();
 }
 
 bool BitArray::operator[](int i) const {
     return data[i / BITS_PER_LONG] & (1UL << (i % BITS_PER_LONG));
 }
 
-BitArray BitArray::operator~() const {
+BitArray BitArray::operator~() const { 
     BitArray result = *this;
 
     for (int i = 0; i < num_bits; i++)
@@ -161,15 +135,10 @@ BitArray BitArray::operator~() const {
 
 int BitArray::count() const {
     int count = 0;
-    int size = num_bits;
-    for (const auto block : data) {
-        for (int i = 0; i < BITS_PER_LONG; i++) {
+    for (const auto block : data)
+        for (int i = 0; i < BITS_PER_LONG; i++)
             if (block & (1UL << i))
                 count++;
-            size--;
-            if (size == 0) return count;
-        }
-    }
 
     return count;
 }
@@ -184,8 +153,10 @@ bool BitArray::empty() const {
 
 std::string BitArray::to_string() const {
     std::string str;
-    for (int i = 0; i < num_bits; i++)
+    for (int i = num_bits - 1; i >= 0; i--) {
         str += (*this)[i] ? '1' : '0';
+    }
+
     return str;
 }
 
@@ -194,7 +165,7 @@ BitArray& BitArray::operator&=(const BitArray& b) {
         throw std::invalid_argument("Bit arrays must be of the same size for bitwise operations");
 
     int size = num_bits / BITS_PER_LONG;
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i <= size; i++)
         data[i] &= b.data[i];
 
     return *this;
@@ -205,18 +176,19 @@ BitArray& BitArray::operator|=(const BitArray& b) {
         throw std::invalid_argument("Bit arrays must be of the same size for bitwise operations");
 
     int size = num_bits / BITS_PER_LONG;
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i <= size; i++)
         data[i] |= b.data[i];
 
     return *this;
 }
+
 
 BitArray& BitArray::operator^=(const BitArray& b) {
     if (num_bits != b.num_bits)
         throw std::invalid_argument("Bit arrays must be of the same size for bitwise operations");
 
     int size = num_bits / BITS_PER_LONG;
-    for (size_t i = 0; i < size; i++)
+    for (size_t i = 0; i <= size; i++)
         data[i] ^= b.data[i];
 
     return *this;
@@ -248,7 +220,7 @@ bool operator!=(const BitArray& a, const BitArray& b) {
     return !(a == b);
 }
 
-BitArray& BitArray::operator>>=(int n) {
+BitArray& BitArray::operator<<=(int n) {
     if (n < 0)
         throw std::invalid_argument("Shift amount must be non-negative");
 
@@ -274,7 +246,7 @@ BitArray& BitArray::operator>>=(int n) {
     return *this;
 }
 
-BitArray& BitArray::operator<<=(int n) {
+BitArray& BitArray::operator>>=(int n) {
     if (n < 0)
         throw std::invalid_argument("Shift amount must be non-negative");
 
