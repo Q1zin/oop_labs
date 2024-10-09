@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -259,10 +259,10 @@
 <span id="L197"><span class="lineNum">     197</span>              :   typedef typename traits_type::off_type off_type;</span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
 <span id="L199"><span class="lineNum">     199</span>              :   // 27.7.1.1.1 Constructor/destructor:</span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC tlaBgGNC">         297 :   inline _LIBCPP_HIDE_FROM_ABI_AFTER_V1 explicit basic_istream(basic_streambuf&lt;char_type, traits_type&gt;* __sb)</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         297 :       : __gc_(0) {</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">         297 :     this-&gt;init(__sb);</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         297 :   }</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC tlaBgGNC">          99 :   inline _LIBCPP_HIDE_FROM_ABI_AFTER_V1 explicit basic_istream(basic_streambuf&lt;char_type, traits_type&gt;* __sb)</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">          99 :       : __gc_(0) {</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          99 :     this-&gt;init(__sb);</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">          99 :   }</span></span>
 <span id="L204"><span class="lineNum">     204</span>              :   ~basic_istream() override;</span>
 <span id="L205"><span class="lineNum">     205</span>              : </span>
 <span id="L206"><span class="lineNum">     206</span>              : protected:</span>
@@ -1231,8 +1231,8 @@
 <span id="L1169"><span class="lineNum">    1169</span>              :   typedef typename traits_type::off_type off_type;</span>
 <span id="L1170"><span class="lineNum">    1170</span>              : </span>
 <span id="L1171"><span class="lineNum">    1171</span>              :   // constructor/destructor</span>
-<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaGNC">         594 :   inline _LIBCPP_HIDE_FROM_ABI_AFTER_V1 explicit basic_iostream(basic_streambuf&lt;char_type, traits_type&gt;* __sb)</span></span>
-<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaGNC">         297 :       : basic_istream&lt;_CharT, _Traits&gt;(__sb) {}</span></span>
+<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaGNC">         198 :   inline _LIBCPP_HIDE_FROM_ABI_AFTER_V1 explicit basic_iostream(basic_streambuf&lt;char_type, traits_type&gt;* __sb)</span></span>
+<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaGNC">          99 :       : basic_istream&lt;_CharT, _Traits&gt;(__sb) {}</span></span>
 <span id="L1174"><span class="lineNum">    1174</span>              : </span>
 <span id="L1175"><span class="lineNum">    1175</span>              :   ~basic_iostream() override;</span>
 <span id="L1176"><span class="lineNum">    1176</span>              : </span>

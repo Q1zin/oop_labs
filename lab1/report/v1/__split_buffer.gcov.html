@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">94.1&nbsp;%</td>
@@ -163,14 +163,14 @@
 <span id="L101"><span class="lineNum">     101</span>              : </span>
 <span id="L102"><span class="lineNum">     102</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI ~__split_buffer();</span>
 <span id="L103"><span class="lineNum">     103</span>              : </span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC tlaBgGNC">         408 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI __alloc_rr&amp; __alloc() _NOEXCEPT { return __end_cap_.second(); }</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC tlaBgGNC">         136 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI __alloc_rr&amp; __alloc() _NOEXCEPT { return __end_cap_.second(); }</span></span>
 <span id="L105"><span class="lineNum">     105</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const __alloc_rr&amp; __alloc() const _NOEXCEPT {</span>
 <span id="L106"><span class="lineNum">     106</span>              :     return __end_cap_.second();</span>
 <span id="L107"><span class="lineNum">     107</span>              :   }</span>
 <span id="L108"><span class="lineNum">     108</span>              : </span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         366 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI pointer&amp; __end_cap() _NOEXCEPT { return __end_cap_.first(); }</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">           6 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const pointer&amp; __end_cap() const _NOEXCEPT {</span></span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           6 :     return __end_cap_.first();</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         122 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI pointer&amp; __end_cap() _NOEXCEPT { return __end_cap_.first(); }</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">           2 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const pointer&amp; __end_cap() const _NOEXCEPT {</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           2 :     return __end_cap_.first();</span></span>
 <span id="L112"><span class="lineNum">     112</span>              :   }</span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
 <span id="L114"><span class="lineNum">     114</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI iterator begin() _NOEXCEPT { return __begin_; }</span>
@@ -179,7 +179,7 @@
 <span id="L117"><span class="lineNum">     117</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI iterator end() _NOEXCEPT { return __end_; }</span>
 <span id="L118"><span class="lineNum">     118</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const_iterator end() const _NOEXCEPT { return __end_; }</span>
 <span id="L119"><span class="lineNum">     119</span>              : </span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         183 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void clear() _NOEXCEPT { __destruct_at_end(__begin_); }</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          61 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void clear() _NOEXCEPT { __destruct_at_end(__begin_); }</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : </span>
 <span id="L122"><span class="lineNum">     122</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type size() const {</span>
 <span id="L123"><span class="lineNum">     123</span>              :     return static_cast&lt;size_type&gt;(__end_ - __begin_);</span>
@@ -187,8 +187,8 @@
 <span id="L125"><span class="lineNum">     125</span>              : </span>
 <span id="L126"><span class="lineNum">     126</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI bool empty() const { return __end_ == __begin_; }</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           6 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type capacity() const {</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           6 :     return static_cast&lt;size_type&gt;(__end_cap() - __first_);</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           2 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type capacity() const {</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           2 :     return static_cast&lt;size_type&gt;(__end_cap() - __first_);</span></span>
 <span id="L130"><span class="lineNum">     130</span>              :   }</span>
 <span id="L131"><span class="lineNum">     131</span>              : </span>
 <span id="L132"><span class="lineNum">     132</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type __front_spare() const {</span>
@@ -242,9 +242,9 @@
 <span id="L180"><span class="lineNum">     180</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __destruct_at_begin(pointer __new_begin, false_type);</span>
 <span id="L181"><span class="lineNum">     181</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __destruct_at_begin(pointer __new_begin, true_type);</span>
 <span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">         183 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __destruct_at_end(pointer __new_last) _NOEXCEPT {</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">         183 :     __destruct_at_end(__new_last, false_type());</span></span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">         183 :   }</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          61 :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __destruct_at_end(pointer __new_last) _NOEXCEPT {</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          61 :     __destruct_at_end(__new_last, false_type());</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">          61 :   }</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : </span>
 <span id="L187"><span class="lineNum">     187</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __destruct_at_end(pointer __new_last, false_type) _NOEXCEPT;</span>
 <span id="L188"><span class="lineNum">     188</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __destruct_at_end(pointer __new_last, true_type) _NOEXCEPT;</span>
@@ -263,13 +263,13 @@
 <span id="L201"><span class="lineNum">     201</span>              :   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __move_assign_alloc(__split_buffer&amp;, false_type) _NOEXCEPT {}</span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
 <span id="L203"><span class="lineNum">     203</span>              :   struct _ConstructTransaction {</span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         366 :     _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit _ConstructTransaction(</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         122 :     _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI explicit _ConstructTransaction(</span></span>
 <span id="L205"><span class="lineNum">     205</span>              :         pointer* __p, size_type __n) _NOEXCEPT</span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         183 :         : __pos_(*__p),</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">         183 :           __end_(*__p + __n),</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">         366 :           __dest_(__p) {}</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">          61 :         : __pos_(*__p),</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          61 :           __end_(*__p + __n),</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">         122 :           __dest_(__p) {}</span></span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">         366 :     _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI ~_ConstructTransaction() { *__dest_ = __pos_; }</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">         122 :     _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI ~_ConstructTransaction() { *__dest_ = __pos_; }</span></span>
 <span id="L211"><span class="lineNum">     211</span>              : </span>
 <span id="L212"><span class="lineNum">     212</span>              :     pointer __pos_;</span>
 <span id="L213"><span class="lineNum">     213</span>              :     const pointer __end_;</span>
@@ -320,12 +320,12 @@
 <span id="L258"><span class="lineNum">     258</span>              : //  Postcondition:  [i] == __x for all i in [size() - __n, __n)</span>
 <span id="L259"><span class="lineNum">     259</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
 <span id="L260"><span class="lineNum">     260</span>              : _LIBCPP_CONSTEXPR_SINCE_CXX20 void</span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC tlaBgGNC">         183 : __split_buffer&lt;_Tp, _Allocator&gt;::__construct_at_end(size_type __n, const_reference __x) {</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         183 :   _ConstructTransaction __tx(&amp;this-&gt;__end_, __n);</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         396 :   for (; __tx.__pos_ != __tx.__end_; ++__tx.__pos_) {</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         213 :     __alloc_traits::construct(this-&gt;__alloc(), std::__to_address(__tx.__pos_), __x);</span></span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">         213 :   }</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         183 : }</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC tlaBgGNC">          61 : __split_buffer&lt;_Tp, _Allocator&gt;::__construct_at_end(size_type __n, const_reference __x) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          61 :   _ConstructTransaction __tx(&amp;this-&gt;__end_, __n);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         132 :   for (; __tx.__pos_ != __tx.__end_; ++__tx.__pos_) {</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">          71 :     __alloc_traits::construct(this-&gt;__alloc(), std::__to_address(__tx.__pos_), __x);</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          71 :   }</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          61 : }</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
 <span id="L268"><span class="lineNum">     268</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
 <span id="L269"><span class="lineNum">     269</span>              : template &lt;class _InputIter, __enable_if_t&lt;__has_exactly_input_iterator_category&lt;_InputIter&gt;::value, int&gt; &gt;</span>
@@ -384,10 +384,10 @@
 <span id="L322"><span class="lineNum">     322</span>              : </span>
 <span id="L323"><span class="lineNum">     323</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
 <span id="L324"><span class="lineNum">     324</span>              : _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI void</span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         183 : __split_buffer&lt;_Tp, _Allocator&gt;::__destruct_at_end(pointer __new_last, false_type) _NOEXCEPT {</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         189 :   while (__new_last != __end_)</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           6 :     __alloc_traits::destroy(__alloc(), std::__to_address(--__end_));</span></span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">         183 : }</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">          61 : __split_buffer&lt;_Tp, _Allocator&gt;::__destruct_at_end(pointer __new_last, false_type) _NOEXCEPT {</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">          63 :   while (__new_last != __end_)</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           2 :     __alloc_traits::destroy(__alloc(), std::__to_address(--__end_));</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          61 : }</span></span>
 <span id="L329"><span class="lineNum">     329</span>              : </span>
 <span id="L330"><span class="lineNum">     330</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
 <span id="L331"><span class="lineNum">     331</span>              : _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI void</span>
@@ -397,25 +397,25 @@
 <span id="L335"><span class="lineNum">     335</span>              : </span>
 <span id="L336"><span class="lineNum">     336</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
 <span id="L337"><span class="lineNum">     337</span>              : _LIBCPP_CONSTEXPR_SINCE_CXX20</span>
-<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">         366 : __split_buffer&lt;_Tp, _Allocator&gt;::__split_buffer(size_type __cap, size_type __start, __alloc_rr&amp; __a)</span></span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         366 :     : __end_cap_(nullptr, __a) {</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">         183 :   if (__cap == 0) {</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">         122 : __split_buffer&lt;_Tp, _Allocator&gt;::__split_buffer(size_type __cap, size_type __start, __alloc_rr&amp; __a)</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         122 :     : __end_cap_(nullptr, __a) {</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">          61 :   if (__cap == 0) {</span></span>
 <span id="L341"><span class="lineNum">     341</span> <span class="tlaUNC tlaBgUNC">           0 :     __first_ = nullptr;</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaUNC">           0 :   } else {</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC tlaBgGNC">         183 :     auto __allocation = std::__allocate_at_least(__alloc(), __cap);</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">         183 :     __first_          = __allocation.ptr;</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">         183 :     __cap             = __allocation.count;</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC tlaBgGNC">          61 :     auto __allocation = std::__allocate_at_least(__alloc(), __cap);</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">          61 :     __first_          = __allocation.ptr;</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">          61 :     __cap             = __allocation.count;</span></span>
 <span id="L346"><span class="lineNum">     346</span>              :   }</span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">         183 :   __begin_ = __end_ = __first_ + __start;</span></span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">         183 :   __end_cap()       = __first_ + __cap;</span></span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">         366 : }</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          61 :   __begin_ = __end_ = __first_ + __start;</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">          61 :   __end_cap()       = __first_ + __cap;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">         122 : }</span></span>
 <span id="L350"><span class="lineNum">     350</span>              : </span>
 <span id="L351"><span class="lineNum">     351</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">         366 : _LIBCPP_CONSTEXPR_SINCE_CXX20 __split_buffer&lt;_Tp, _Allocator&gt;::~__split_buffer() {</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">         183 :   clear();</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         183 :   if (__first_)</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           6 :     __alloc_traits::deallocate(__alloc(), __first_, capacity());</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         366 : }</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">         122 : _LIBCPP_CONSTEXPR_SINCE_CXX20 __split_buffer&lt;_Tp, _Allocator&gt;::~__split_buffer() {</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">          61 :   clear();</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">          61 :   if (__first_)</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           2 :     __alloc_traits::deallocate(__alloc(), __first_, capacity());</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         122 : }</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
 <span id="L358"><span class="lineNum">     358</span>              : template &lt;class _Tp, class _Allocator&gt;</span>
 <span id="L359"><span class="lineNum">     359</span>              : _LIBCPP_CONSTEXPR_SINCE_CXX20 __split_buffer&lt;_Tp, _Allocator&gt;::__split_buffer(__split_buffer&amp;&amp; __c)</span>

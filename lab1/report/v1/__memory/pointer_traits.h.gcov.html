@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -220,8 +220,8 @@
 <span id="L158"><span class="lineNum">     158</span>              : </span>
 <span id="L159"><span class="lineNum">     159</span>              : public:</span>
 <span id="L160"><span class="lineNum">     160</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 static pointer</span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC tlaBgGNC">        4722 :   pointer_to(__conditional_t&lt;is_void&lt;element_type&gt;::value, __nat, element_type&gt;&amp; __r) _NOEXCEPT {</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        4722 :     return std::addressof(__r);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC tlaBgGNC">        1574 :   pointer_to(__conditional_t&lt;is_void&lt;element_type&gt;::value, __nat, element_type&gt;&amp; __r) _NOEXCEPT {</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        1574 :     return std::addressof(__r);</span></span>
 <span id="L163"><span class="lineNum">     163</span>              :   }</span>
 <span id="L164"><span class="lineNum">     164</span>              : };</span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
@@ -239,9 +239,9 @@
 <span id="L177"><span class="lineNum">     177</span>              : struct __to_address_helper;</span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
 <span id="L179"><span class="lineNum">     179</span>              : template &lt;class _Tp&gt;</span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        9072 : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR _Tp* __to_address(_Tp* __p) _NOEXCEPT {</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        3024 : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR _Tp* __to_address(_Tp* __p) _NOEXCEPT {</span></span>
 <span id="L181"><span class="lineNum">     181</span>              :   static_assert(!is_function&lt;_Tp&gt;::value, &quot;_Tp is a function type&quot;);</span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        9072 :   return __p;</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        3024 :   return __p;</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : }</span>
 <span id="L184"><span class="lineNum">     184</span>              : </span>
 <span id="L185"><span class="lineNum">     185</span>              : template &lt;class _Pointer, class = void&gt;</span>
@@ -266,8 +266,8 @@
 <span id="L204"><span class="lineNum">     204</span>              : template &lt;class _Pointer, class = __enable_if_t&lt; _And&lt;is_class&lt;_Pointer&gt;, _IsFancyPointer&lt;_Pointer&gt; &gt;::value &gt; &gt;</span>
 <span id="L205"><span class="lineNum">     205</span>              : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR</span>
 <span id="L206"><span class="lineNum">     206</span>              :     __decay_t&lt;decltype(__to_address_helper&lt;_Pointer&gt;::__call(std::declval&lt;const _Pointer&amp;&gt;()))&gt;</span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          72 :     __to_address(const _Pointer&amp; __p) _NOEXCEPT {</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          72 :   return __to_address_helper&lt;_Pointer&gt;::__call(__p);</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          24 :     __to_address(const _Pointer&amp; __p) _NOEXCEPT {</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          24 :   return __to_address_helper&lt;_Pointer&gt;::__call(__p);</span></span>
 <span id="L209"><span class="lineNum">     209</span>              : }</span>
 <span id="L210"><span class="lineNum">     210</span>              : </span>
 <span id="L211"><span class="lineNum">     211</span>              : template &lt;class _Pointer, class&gt;</span>
@@ -284,8 +284,8 @@
 <span id="L222"><span class="lineNum">     222</span>              :                            decltype((void)pointer_traits&lt;_Pointer&gt;::to_address(std::declval&lt;const _Pointer&amp;&gt;()))&gt; {</span>
 <span id="L223"><span class="lineNum">     223</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR static decltype(pointer_traits&lt;_Pointer&gt;::to_address(</span>
 <span id="L224"><span class="lineNum">     224</span>              :       std::declval&lt;const _Pointer&amp;&gt;()))</span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">          72 :   __call(const _Pointer&amp; __p) _NOEXCEPT {</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          72 :     return pointer_traits&lt;_Pointer&gt;::to_address(__p);</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">          24 :   __call(const _Pointer&amp; __p) _NOEXCEPT {</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          24 :     return pointer_traits&lt;_Pointer&gt;::to_address(__p);</span></span>
 <span id="L227"><span class="lineNum">     227</span>              :   }</span>
 <span id="L228"><span class="lineNum">     228</span>              : };</span>
 <span id="L229"><span class="lineNum">     229</span>              : </span>

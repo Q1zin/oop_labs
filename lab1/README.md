@@ -20,7 +20,7 @@
     <li>g++ -std=c++17 lab1_tests.cpp BitArray.cpp googletest/build/lib/libgtest.a googletest/build/lib/libgtest_main.a -lpthread -I googletest/googletest/include && ./a.out</li>
 </ul>
 <img src="./scrin_tests.png" alt="img: Tests passed">
-<h2>The Test Analyzer (Do all the previous steps):</h2>
+<h2>The Test Analyzer (Do all the previous steps, I used lcov and gcov):</h2>
 <ul>
     <li>g++ -std=c++17 lab1_tests.cpp BitArray.cpp googletest/build/lib/libgtest.a googletest/build/lib/libgtest_main.a --coverage -lpthread -I googletest/googletest/include && ./a.out -lgtest</li>
     <li>lcov -t "gcd" -o gcd.info -c -d . --ignore-errors inconsistent</li>
@@ -28,7 +28,7 @@
     <li>Go to report and open index.html , we go into the project and see the coverage</li>
 </ul>
 <img src="./scrin_analyzer.png" alt="img: Coverage 100% Functions">
-<h2>Documentation:</h2>
+<h2>Documentation (I used Doxygen):</h2>
 <ul>
     <li>In the BitArray.h file, we write comments in a special way</li>
     <li>I specified the settings in the Doxyfile (you can use mine as a template)</li>

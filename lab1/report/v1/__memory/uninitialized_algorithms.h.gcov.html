@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -633,7 +633,7 @@
 <span id="L571"><span class="lineNum">     571</span>              :               is_same&lt;__remove_const_t&lt;_In&gt;, __remove_const_t&lt;_Out&gt; &gt;::value &amp;&amp;</span>
 <span id="L572"><span class="lineNum">     572</span>              :               __allocator_has_trivial_copy_construct&lt;_Alloc, _RawTypeIn&gt;::value&gt;* = nullptr&gt;</span>
 <span id="L573"><span class="lineNum">     573</span>              : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Out*</span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC tlaBgGNC">          66 : __uninitialized_allocator_copy_impl(_Alloc&amp;, _In* __first1, _In* __last1, _Out* __first2) {</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC tlaBgGNC">          22 : __uninitialized_allocator_copy_impl(_Alloc&amp;, _In* __first1, _In* __last1, _Out* __first2) {</span></span>
 <span id="L575"><span class="lineNum">     575</span>              :   // TODO: Remove the const_cast once we drop support for std::allocator&lt;T const&gt;</span>
 <span id="L576"><span class="lineNum">     576</span>              :   if (__libcpp_is_constant_evaluated()) {</span>
 <span id="L577"><span class="lineNum">     577</span>              :     while (__first1 != __last1) {</span>
@@ -643,17 +643,17 @@
 <span id="L581"><span class="lineNum">     581</span>              :     }</span>
 <span id="L582"><span class="lineNum">     582</span>              :     return __first2;</span>
 <span id="L583"><span class="lineNum">     583</span>              :   } else {</span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">          66 :     return std::copy(__first1, __last1, const_cast&lt;_RawTypeIn*&gt;(__first2));</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">          22 :     return std::copy(__first1, __last1, const_cast&lt;_RawTypeIn*&gt;(__first2));</span></span>
 <span id="L585"><span class="lineNum">     585</span>              :   }</span>
 <span id="L586"><span class="lineNum">     586</span>              : }</span>
 <span id="L587"><span class="lineNum">     587</span>              : </span>
 <span id="L588"><span class="lineNum">     588</span>              : template &lt;class _Alloc, class _Iter1, class _Sent1, class _Iter2&gt;</span>
 <span id="L589"><span class="lineNum">     589</span>              : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Iter2</span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          66 : __uninitialized_allocator_copy(_Alloc&amp; __alloc, _Iter1 __first1, _Sent1 __last1, _Iter2 __first2) {</span></span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          66 :   auto __unwrapped_range = std::__unwrap_range(__first1, __last1);</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">          66 :   auto __result          = std::__uninitialized_allocator_copy_impl(</span></span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">          66 :       __alloc, __unwrapped_range.first, __unwrapped_range.second, std::__unwrap_iter(__first2));</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">          66 :   return std::__rewrap_iter(__first2, __result);</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          22 : __uninitialized_allocator_copy(_Alloc&amp; __alloc, _Iter1 __first1, _Sent1 __last1, _Iter2 __first2) {</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          22 :   auto __unwrapped_range = std::__unwrap_range(__first1, __last1);</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">          22 :   auto __result          = std::__uninitialized_allocator_copy_impl(</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">          22 :       __alloc, __unwrapped_range.first, __unwrapped_range.second, std::__unwrap_iter(__first2));</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">          22 :   return std::__rewrap_iter(__first2, __result);</span></span>
 <span id="L595"><span class="lineNum">     595</span>              : }</span>
 <span id="L596"><span class="lineNum">     596</span>              : </span>
 <span id="L597"><span class="lineNum">     597</span>              : // Move-construct the elements [__first1, __last1) into [__first2, __first2 + N)</span>
@@ -697,7 +697,7 @@
 <span id="L635"><span class="lineNum">     635</span>              :     class = __enable_if_t&lt;is_trivially_move_constructible&lt;_Type&gt;::value &amp;&amp; is_trivially_move_assignable&lt;_Type&gt;::value &amp;&amp;</span>
 <span id="L636"><span class="lineNum">     636</span>              :                           __allocator_has_trivial_move_construct&lt;_Alloc, _Type&gt;::value&gt; &gt;</span>
 <span id="L637"><span class="lineNum">     637</span>              : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Iter2</span>
-<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">         183 : __uninitialized_allocator_move_if_noexcept(_Alloc&amp;, _Iter1 __first1, _Iter1 __last1, _Iter2 __first2) {</span></span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">          61 : __uninitialized_allocator_move_if_noexcept(_Alloc&amp;, _Iter1 __first1, _Iter1 __last1, _Iter2 __first2) {</span></span>
 <span id="L639"><span class="lineNum">     639</span>              :   if (__libcpp_is_constant_evaluated()) {</span>
 <span id="L640"><span class="lineNum">     640</span>              :     while (__first1 != __last1) {</span>
 <span id="L641"><span class="lineNum">     641</span>              :       std::__construct_at(std::__to_address(__first2), std::move(*__first1));</span>
@@ -706,7 +706,7 @@
 <span id="L644"><span class="lineNum">     644</span>              :     }</span>
 <span id="L645"><span class="lineNum">     645</span>              :     return __first2;</span>
 <span id="L646"><span class="lineNum">     646</span>              :   } else {</span>
-<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">         183 :     return std::move(__first1, __last1, __first2);</span></span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">          61 :     return std::move(__first1, __last1, __first2);</span></span>
 <span id="L648"><span class="lineNum">     648</span>              :   }</span>
 <span id="L649"><span class="lineNum">     649</span>              : }</span>
 <span id="L650"><span class="lineNum">     650</span>              : #endif // _LIBCPP_COMPILER_GCC</span>

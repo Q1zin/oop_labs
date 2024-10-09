@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">77.4&nbsp;%</td>
@@ -939,11 +939,11 @@
 <span id="L877"><span class="lineNum">     877</span>              : public:</span>
 <span id="L878"><span class="lineNum">     878</span>              :   _LIBCPP_TEMPLATE_DATA_VIS static const size_type npos = -1;</span>
 <span id="L879"><span class="lineNum">     879</span>              : </span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC tlaBgGNC">        3018 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string()</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC tlaBgGNC">        1006 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string()</span></span>
 <span id="L881"><span class="lineNum">     881</span>              :       _NOEXCEPT_(is_nothrow_default_constructible&lt;allocator_type&gt;::value)</span>
-<span id="L882"><span class="lineNum">     882</span> <span class="tlaGNC">        3018 :       : __r_(__value_init_tag(), __default_init_tag()) {</span></span>
-<span id="L883"><span class="lineNum">     883</span> <span class="tlaGNC">        1509 :     __annotate_new(0);</span></span>
-<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC">        3018 :   }</span></span>
+<span id="L882"><span class="lineNum">     882</span> <span class="tlaGNC">        1006 :       : __r_(__value_init_tag(), __default_init_tag()) {</span></span>
+<span id="L883"><span class="lineNum">     883</span> <span class="tlaGNC">         503 :     __annotate_new(0);</span></span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC">        1006 :   }</span></span>
 <span id="L885"><span class="lineNum">     885</span>              : </span>
 <span id="L886"><span class="lineNum">     886</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 explicit basic_string(const allocator_type&amp; __a)</span>
 <span id="L887"><span class="lineNum">     887</span>              : #if _LIBCPP_STD_VER &lt;= 14</span>
@@ -975,7 +975,7 @@
 <span id="L913"><span class="lineNum">     913</span>              :   }</span>
 <span id="L914"><span class="lineNum">     914</span>              : </span>
 <span id="L915"><span class="lineNum">     915</span>              : #ifndef _LIBCPP_CXX03_LANG</span>
-<span id="L916"><span class="lineNum">     916</span> <span class="tlaGNC">         714 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string(basic_string&amp;&amp; __str)</span></span>
+<span id="L916"><span class="lineNum">     916</span> <span class="tlaGNC">         238 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string(basic_string&amp;&amp; __str)</span></span>
 <span id="L917"><span class="lineNum">     917</span>              : #  if _LIBCPP_STD_VER &lt;= 14</span>
 <span id="L918"><span class="lineNum">     918</span>              :       _NOEXCEPT_(is_nothrow_move_constructible&lt;allocator_type&gt;::value)</span>
 <span id="L919"><span class="lineNum">     919</span>              : #  else</span>
@@ -984,12 +984,12 @@
 <span id="L922"><span class="lineNum">     922</span>              :       // Turning off ASan instrumentation for variable initialization with _LIBCPP_STRING_INTERNAL_MEMORY_ACCESS</span>
 <span id="L923"><span class="lineNum">     923</span>              :       // does not work consistently during initialization of __r_, so we instead unpoison __str's memory manually first.</span>
 <span id="L924"><span class="lineNum">     924</span>              :       // __str's memory needs to be unpoisoned only in the case where it's a short string.</span>
-<span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC">        1071 :       : __r_([](basic_string &amp;__s) -&gt; decltype(__s.__r_)&amp;&amp; { if(!__s.__is_long()) __s.__annotate_delete(); return std::move(__s.__r_); }(__str)) {</span></span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">         357 :     __str.__r_.first() = __rep();</span></span>
-<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">         357 :     __str.__annotate_new(0);</span></span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">         357 :     if (!__is_long())</span></span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">         210 :       __annotate_new(size());</span></span>
-<span id="L930"><span class="lineNum">     930</span> <span class="tlaGNC">         714 :   }</span></span>
+<span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC">         357 :       : __r_([](basic_string &amp;__s) -&gt; decltype(__s.__r_)&amp;&amp; { if(!__s.__is_long()) __s.__annotate_delete(); return std::move(__s.__r_); }(__str)) {</span></span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">         119 :     __str.__r_.first() = __rep();</span></span>
+<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">         119 :     __str.__annotate_new(0);</span></span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">         119 :     if (!__is_long())</span></span>
+<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">          70 :       __annotate_new(size());</span></span>
+<span id="L930"><span class="lineNum">     930</span> <span class="tlaGNC">         238 :   }</span></span>
 <span id="L931"><span class="lineNum">     931</span>              : </span>
 <span id="L932"><span class="lineNum">     932</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string(basic_string&amp;&amp; __str, const allocator_type&amp; __a)</span>
 <span id="L933"><span class="lineNum">     933</span>              :       : __r_(__default_init_tag(), __a) {</span>
@@ -1010,11 +1010,11 @@
 <span id="L948"><span class="lineNum">     948</span>              : #endif // _LIBCPP_CXX03_LANG</span>
 <span id="L949"><span class="lineNum">     949</span>              : </span>
 <span id="L950"><span class="lineNum">     950</span>              :   template &lt;__enable_if_t&lt;__is_allocator&lt;_Allocator&gt;::value, int&gt; = 0&gt;</span>
-<span id="L951"><span class="lineNum">     951</span> <span class="tlaGNC">        1584 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string(const _CharT* __s)</span></span>
-<span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">        1584 :       : __r_(__default_init_tag(), __default_init_tag()) {</span></span>
+<span id="L951"><span class="lineNum">     951</span> <span class="tlaGNC">         528 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string(const _CharT* __s)</span></span>
+<span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">         528 :       : __r_(__default_init_tag(), __default_init_tag()) {</span></span>
 <span id="L953"><span class="lineNum">     953</span>              :     _LIBCPP_ASSERT_NON_NULL(__s != nullptr, &quot;basic_string(const char*) detected nullptr&quot;);</span>
-<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">         792 :     __init(__s, traits_type::length(__s));</span></span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">        1584 :   }</span></span>
+<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">         264 :     __init(__s, traits_type::length(__s));</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">         528 :   }</span></span>
 <span id="L956"><span class="lineNum">     956</span>              : </span>
 <span id="L957"><span class="lineNum">     957</span>              :   template &lt;__enable_if_t&lt;__is_allocator&lt;_Allocator&gt;::value, int&gt; = 0&gt;</span>
 <span id="L958"><span class="lineNum">     958</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string(const _CharT* __s, const _Allocator&amp; __a)</span>
@@ -1235,8 +1235,8 @@
 <span id="L1173"><span class="lineNum">    1173</span>              :   }</span>
 <span id="L1174"><span class="lineNum">    1174</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_reverse_iterator crend() const _NOEXCEPT { return rend(); }</span>
 <span id="L1175"><span class="lineNum">    1175</span>              : </span>
-<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaGNC tlaBgGNC">        4308 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 size_type size() const _NOEXCEPT {</span></span>
-<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaGNC">        4308 :     return __is_long() ? __get_long_size() : __get_short_size();</span></span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaGNC tlaBgGNC">        1436 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 size_type size() const _NOEXCEPT {</span></span>
+<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaGNC">        1436 :     return __is_long() ? __get_long_size() : __get_short_size();</span></span>
 <span id="L1178"><span class="lineNum">    1178</span>              :   }</span>
 <span id="L1179"><span class="lineNum">    1179</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 size_type length() const _NOEXCEPT { return size(); }</span>
 <span id="L1180"><span class="lineNum">    1180</span>              : </span>
@@ -1316,9 +1316,9 @@
 <span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :     return append(__s);</span></span>
 <span id="L1255"><span class="lineNum">    1255</span>              :   }</span>
 <span id="L1256"><span class="lineNum">    1256</span>              : </span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC tlaBgGNC">        3813 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string&amp; operator+=(value_type __c) {</span></span>
-<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaGNC">        3813 :     push_back(__c);</span></span>
-<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">        3813 :     return *this;</span></span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC tlaBgGNC">        1271 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string&amp; operator+=(value_type __c) {</span></span>
+<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaGNC">        1271 :     push_back(__c);</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">        1271 :     return *this;</span></span>
 <span id="L1260"><span class="lineNum">    1260</span>              :   }</span>
 <span id="L1261"><span class="lineNum">    1261</span>              : </span>
 <span id="L1262"><span class="lineNum">    1262</span>              : #ifndef _LIBCPP_CXX03_LANG</span>
@@ -1327,8 +1327,8 @@
 <span id="L1265"><span class="lineNum">    1265</span>              :   }</span>
 <span id="L1266"><span class="lineNum">    1266</span>              : #endif // _LIBCPP_CXX03_LANG</span>
 <span id="L1267"><span class="lineNum">    1267</span>              : </span>
-<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaGNC">         135 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string&amp; append(const basic_string&amp; __str) {</span></span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaGNC">         135 :     return append(__str.data(), __str.size());</span></span>
+<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaGNC">          45 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string&amp; append(const basic_string&amp; __str) {</span></span>
+<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaGNC">          45 :     return append(__str.data(), __str.size());</span></span>
 <span id="L1270"><span class="lineNum">    1270</span>              :   }</span>
 <span id="L1271"><span class="lineNum">    1271</span>              : </span>
 <span id="L1272"><span class="lineNum">    1272</span>              :   template &lt;class _Tp,</span>
@@ -1654,9 +1654,9 @@
 <span id="L1592"><span class="lineNum">    1592</span>              :       _NOEXCEPT_(!__alloc_traits::propagate_on_container_swap::value || __is_nothrow_swappable&lt;allocator_type&gt;::value);</span>
 <span id="L1593"><span class="lineNum">    1593</span>              : #endif</span>
 <span id="L1594"><span class="lineNum">    1594</span>              : </span>
-<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaGNC">        5241 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const value_type* c_str() const _NOEXCEPT { return data(); }</span></span>
-<span id="L1596"><span class="lineNum">    1596</span> <span class="tlaGNC">        6597 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const value_type* data() const _NOEXCEPT {</span></span>
-<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC">        6597 :     return std::__to_address(__get_pointer());</span></span>
+<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaGNC">        1747 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const value_type* c_str() const _NOEXCEPT { return data(); }</span></span>
+<span id="L1596"><span class="lineNum">    1596</span> <span class="tlaGNC">        2199 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const value_type* data() const _NOEXCEPT {</span></span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC">        2199 :     return std::__to_address(__get_pointer());</span></span>
 <span id="L1598"><span class="lineNum">    1598</span>              :   }</span>
 <span id="L1599"><span class="lineNum">    1599</span>              : #if _LIBCPP_STD_VER &gt;= 17</span>
 <span id="L1600"><span class="lineNum">    1600</span> <span class="tlaUNC tlaBgUNC">           0 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 value_type* data() _NOEXCEPT {</span></span>
@@ -1828,11 +1828,11 @@
 <span id="L1766"><span class="lineNum">    1766</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __shrink_or_extend(size_type __target_capacity);</span>
 <span id="L1767"><span class="lineNum">    1767</span>              : </span>
 <span id="L1768"><span class="lineNum">    1768</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_STRING_INTERNAL_MEMORY_ACCESS bool</span>
-<span id="L1769"><span class="lineNum">    1769</span> <span class="tlaGNC tlaBgGNC">       11814 :   __is_long() const _NOEXCEPT {</span></span>
+<span id="L1769"><span class="lineNum">    1769</span> <span class="tlaGNC tlaBgGNC">        3938 :   __is_long() const _NOEXCEPT {</span></span>
 <span id="L1770"><span class="lineNum">    1770</span>              :     if (__libcpp_is_constant_evaluated() &amp;&amp; __builtin_constant_p(__r_.first().__l.__is_long_)) {</span>
 <span id="L1771"><span class="lineNum">    1771</span>              :       return __r_.first().__l.__is_long_;</span>
 <span id="L1772"><span class="lineNum">    1772</span>              :     }</span>
-<span id="L1773"><span class="lineNum">    1773</span> <span class="tlaGNC">       11814 :     return __r_.first().__s.__is_long_;</span></span>
+<span id="L1773"><span class="lineNum">    1773</span> <span class="tlaGNC">        3938 :     return __r_.first().__s.__is_long_;</span></span>
 <span id="L1774"><span class="lineNum">    1774</span>              :   }</span>
 <span id="L1775"><span class="lineNum">    1775</span>              : </span>
 <span id="L1776"><span class="lineNum">    1776</span>              :   static _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __begin_lifetime(pointer __begin, size_type __n) {</span>
@@ -1896,16 +1896,16 @@
 <span id="L1834"><span class="lineNum">    1834</span>              :   }</span>
 <span id="L1835"><span class="lineNum">    1835</span>              : </span>
 <span id="L1836"><span class="lineNum">    1836</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_STRING_INTERNAL_MEMORY_ACCESS size_type</span>
-<span id="L1837"><span class="lineNum">    1837</span> <span class="tlaGNC">        2445 :   __get_short_size() const _NOEXCEPT {</span></span>
+<span id="L1837"><span class="lineNum">    1837</span> <span class="tlaGNC">         815 :   __get_short_size() const _NOEXCEPT {</span></span>
 <span id="L1838"><span class="lineNum">    1838</span>              :     _LIBCPP_ASSERT_INTERNAL(!__r_.first().__s.__is_long_, &quot;String has to be short when trying to get the short size&quot;);</span>
-<span id="L1839"><span class="lineNum">    1839</span> <span class="tlaGNC">        2445 :     return __r_.first().__s.__size_;</span></span>
+<span id="L1839"><span class="lineNum">    1839</span> <span class="tlaGNC">         815 :     return __r_.first().__s.__size_;</span></span>
 <span id="L1840"><span class="lineNum">    1840</span>              :   }</span>
 <span id="L1841"><span class="lineNum">    1841</span>              : </span>
 <span id="L1842"><span class="lineNum">    1842</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __set_long_size(size_type __s) _NOEXCEPT {</span>
 <span id="L1843"><span class="lineNum">    1843</span>              :     __r_.first().__l.__size_ = __s;</span>
 <span id="L1844"><span class="lineNum">    1844</span>              :   }</span>
-<span id="L1845"><span class="lineNum">    1845</span> <span class="tlaGNC">        1863 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 size_type __get_long_size() const _NOEXCEPT {</span></span>
-<span id="L1846"><span class="lineNum">    1846</span> <span class="tlaGNC">        1863 :     return __r_.first().__l.__size_;</span></span>
+<span id="L1845"><span class="lineNum">    1845</span> <span class="tlaGNC">         621 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 size_type __get_long_size() const _NOEXCEPT {</span></span>
+<span id="L1846"><span class="lineNum">    1846</span> <span class="tlaGNC">         621 :     return __r_.first().__l.__size_;</span></span>
 <span id="L1847"><span class="lineNum">    1847</span>              :   }</span>
 <span id="L1848"><span class="lineNum">    1848</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __set_size(size_type __s) _NOEXCEPT {</span>
 <span id="L1849"><span class="lineNum">    1849</span>              :     if (__is_long())</span>
@@ -1926,23 +1926,23 @@
 <span id="L1864"><span class="lineNum">    1864</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __set_long_pointer(pointer __p) _NOEXCEPT {</span>
 <span id="L1865"><span class="lineNum">    1865</span>              :     __r_.first().__l.__data_ = __p;</span>
 <span id="L1866"><span class="lineNum">    1866</span>              :   }</span>
-<span id="L1867"><span class="lineNum">    1867</span> <span class="tlaGNC">          30 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_long_pointer() _NOEXCEPT {</span></span>
-<span id="L1868"><span class="lineNum">    1868</span> <span class="tlaGNC">          30 :     return __r_.first().__l.__data_;</span></span>
+<span id="L1867"><span class="lineNum">    1867</span> <span class="tlaGNC">          10 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_long_pointer() _NOEXCEPT {</span></span>
+<span id="L1868"><span class="lineNum">    1868</span> <span class="tlaGNC">          10 :     return __r_.first().__l.__data_;</span></span>
 <span id="L1869"><span class="lineNum">    1869</span>              :   }</span>
-<span id="L1870"><span class="lineNum">    1870</span> <span class="tlaGNC">        2040 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_long_pointer() const _NOEXCEPT {</span></span>
-<span id="L1871"><span class="lineNum">    1871</span> <span class="tlaGNC">        2040 :     return __r_.first().__l.__data_;</span></span>
+<span id="L1870"><span class="lineNum">    1870</span> <span class="tlaGNC">         680 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_long_pointer() const _NOEXCEPT {</span></span>
+<span id="L1871"><span class="lineNum">    1871</span> <span class="tlaGNC">         680 :     return __r_.first().__l.__data_;</span></span>
 <span id="L1872"><span class="lineNum">    1872</span>              :   }</span>
-<span id="L1873"><span class="lineNum">    1873</span> <span class="tlaGNC">         135 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_short_pointer() _NOEXCEPT {</span></span>
-<span id="L1874"><span class="lineNum">    1874</span> <span class="tlaGNC">         135 :     return pointer_traits&lt;pointer&gt;::pointer_to(__r_.first().__s.__data_[0]);</span></span>
+<span id="L1873"><span class="lineNum">    1873</span> <span class="tlaGNC">          45 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_short_pointer() _NOEXCEPT {</span></span>
+<span id="L1874"><span class="lineNum">    1874</span> <span class="tlaGNC">          45 :     return pointer_traits&lt;pointer&gt;::pointer_to(__r_.first().__s.__data_[0]);</span></span>
 <span id="L1875"><span class="lineNum">    1875</span>              :   }</span>
-<span id="L1876"><span class="lineNum">    1876</span> <span class="tlaGNC">        4587 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_short_pointer() const _NOEXCEPT {</span></span>
-<span id="L1877"><span class="lineNum">    1877</span> <span class="tlaGNC">        4587 :     return pointer_traits&lt;const_pointer&gt;::pointer_to(__r_.first().__s.__data_[0]);</span></span>
+<span id="L1876"><span class="lineNum">    1876</span> <span class="tlaGNC">        1529 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_short_pointer() const _NOEXCEPT {</span></span>
+<span id="L1877"><span class="lineNum">    1877</span> <span class="tlaGNC">        1529 :     return pointer_traits&lt;const_pointer&gt;::pointer_to(__r_.first().__s.__data_[0]);</span></span>
 <span id="L1878"><span class="lineNum">    1878</span>              :   }</span>
-<span id="L1879"><span class="lineNum">    1879</span> <span class="tlaGNC">         165 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_pointer() _NOEXCEPT {</span></span>
-<span id="L1880"><span class="lineNum">    1880</span> <span class="tlaGNC">         165 :     return __is_long() ? __get_long_pointer() : __get_short_pointer();</span></span>
+<span id="L1879"><span class="lineNum">    1879</span> <span class="tlaGNC">          55 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_pointer() _NOEXCEPT {</span></span>
+<span id="L1880"><span class="lineNum">    1880</span> <span class="tlaGNC">          55 :     return __is_long() ? __get_long_pointer() : __get_short_pointer();</span></span>
 <span id="L1881"><span class="lineNum">    1881</span>              :   }</span>
-<span id="L1882"><span class="lineNum">    1882</span> <span class="tlaGNC">        6627 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_pointer() const _NOEXCEPT {</span></span>
-<span id="L1883"><span class="lineNum">    1883</span> <span class="tlaGNC">        6627 :     return __is_long() ? __get_long_pointer() : __get_short_pointer();</span></span>
+<span id="L1882"><span class="lineNum">    1882</span> <span class="tlaGNC">        2209 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_pointer() const _NOEXCEPT {</span></span>
+<span id="L1883"><span class="lineNum">    1883</span> <span class="tlaGNC">        2209 :     return __is_long() ? __get_long_pointer() : __get_short_pointer();</span></span>
 <span id="L1884"><span class="lineNum">    1884</span>              :   }</span>
 <span id="L1885"><span class="lineNum">    1885</span>              : </span>
 <span id="L1886"><span class="lineNum">    1886</span>              :   // The following functions are no-ops outside of AddressSanitizer mode.</span>
@@ -1963,20 +1963,20 @@
 <span id="L1901"><span class="lineNum">    1901</span>              :     return _LIBCPP_SHORT_STRING_ANNOTATIONS_ALLOWED &amp;&amp; !__libcpp_is_constant_evaluated();</span>
 <span id="L1902"><span class="lineNum">    1902</span>              :   }</span>
 <span id="L1903"><span class="lineNum">    1903</span>              : </span>
-<span id="L1904"><span class="lineNum">    1904</span> <span class="tlaGNC">        2211 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __annotate_new(size_type __current_size) const _NOEXCEPT {</span></span>
+<span id="L1904"><span class="lineNum">    1904</span> <span class="tlaGNC">         737 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __annotate_new(size_type __current_size) const _NOEXCEPT {</span></span>
 <span id="L1905"><span class="lineNum">    1905</span>              :     (void) __current_size;</span>
 <span id="L1906"><span class="lineNum">    1906</span>              : #if !defined(_LIBCPP_HAS_NO_ASAN) &amp;&amp; defined(_LIBCPP_INSTRUMENTED_WITH_ASAN)</span>
 <span id="L1907"><span class="lineNum">    1907</span>              :     if (!__libcpp_is_constant_evaluated() &amp;&amp; (__asan_short_string_is_annotated() || __is_long()))</span>
 <span id="L1908"><span class="lineNum">    1908</span>              :       __annotate_contiguous_container(data() + capacity() + 1, data() + __current_size + 1);</span>
 <span id="L1909"><span class="lineNum">    1909</span>              : #endif</span>
-<span id="L1910"><span class="lineNum">    1910</span> <span class="tlaGNC">        2211 :   }</span></span>
+<span id="L1910"><span class="lineNum">    1910</span> <span class="tlaGNC">         737 :   }</span></span>
 <span id="L1911"><span class="lineNum">    1911</span>              : </span>
-<span id="L1912"><span class="lineNum">    1912</span> <span class="tlaGNC">         210 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __annotate_delete() const _NOEXCEPT {</span></span>
+<span id="L1912"><span class="lineNum">    1912</span> <span class="tlaGNC">          70 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __annotate_delete() const _NOEXCEPT {</span></span>
 <span id="L1913"><span class="lineNum">    1913</span>              : #if !defined(_LIBCPP_HAS_NO_ASAN) &amp;&amp; defined(_LIBCPP_INSTRUMENTED_WITH_ASAN)</span>
 <span id="L1914"><span class="lineNum">    1914</span>              :     if (!__libcpp_is_constant_evaluated() &amp;&amp; (__asan_short_string_is_annotated() || __is_long()))</span>
 <span id="L1915"><span class="lineNum">    1915</span>              :       __annotate_contiguous_container(data() + size() + 1, data() + capacity() + 1);</span>
 <span id="L1916"><span class="lineNum">    1916</span>              : #endif</span>
-<span id="L1917"><span class="lineNum">    1917</span> <span class="tlaGNC">         210 :   }</span></span>
+<span id="L1917"><span class="lineNum">    1917</span> <span class="tlaGNC">          70 :   }</span></span>
 <span id="L1918"><span class="lineNum">    1918</span>              : </span>
 <span id="L1919"><span class="lineNum">    1919</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void __annotate_increase(size_type __n) const _NOEXCEPT {</span>
 <span id="L1920"><span class="lineNum">    1920</span>              :     (void) __n;</span>
@@ -3792,18 +3792,18 @@
 <span id="L3730"><span class="lineNum">    3730</span>              : </span>
 <span id="L3731"><span class="lineNum">    3731</span>              : template &lt;class _CharT, class _Traits, class _Allocator&gt;</span>
 <span id="L3732"><span class="lineNum">    3732</span>              : inline _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI bool</span>
-<span id="L3733"><span class="lineNum">    3733</span> <span class="tlaGNC tlaBgGNC">          87 : operator==(const basic_string&lt;_CharT, _Traits, _Allocator&gt;&amp; __lhs, const _CharT* __rhs) _NOEXCEPT {</span></span>
+<span id="L3733"><span class="lineNum">    3733</span> <span class="tlaGNC tlaBgGNC">          29 : operator==(const basic_string&lt;_CharT, _Traits, _Allocator&gt;&amp; __lhs, const _CharT* __rhs) _NOEXCEPT {</span></span>
 <span id="L3734"><span class="lineNum">    3734</span>              : #if _LIBCPP_STD_VER &gt;= 20</span>
 <span id="L3735"><span class="lineNum">    3735</span>              :   return basic_string_view&lt;_CharT, _Traits&gt;(__lhs) == basic_string_view&lt;_CharT, _Traits&gt;(__rhs);</span>
 <span id="L3736"><span class="lineNum">    3736</span>              : #else</span>
 <span id="L3737"><span class="lineNum">    3737</span>              :   typedef basic_string&lt;_CharT, _Traits, _Allocator&gt; _String;</span>
 <span id="L3738"><span class="lineNum">    3738</span>              :   _LIBCPP_ASSERT_NON_NULL(__rhs != nullptr, &quot;operator==(basic_string, char*): received nullptr&quot;);</span>
-<span id="L3739"><span class="lineNum">    3739</span> <span class="tlaGNC">          87 :   size_t __rhs_len = _Traits::length(__rhs);</span></span>
-<span id="L3740"><span class="lineNum">    3740</span> <span class="tlaGNC">          87 :   if (__rhs_len != __lhs.size())</span></span>
-<span id="L3741"><span class="lineNum">    3741</span> <span class="tlaGNC">           9 :     return false;</span></span>
-<span id="L3742"><span class="lineNum">    3742</span> <span class="tlaGNC">          78 :   return __lhs.compare(0, _String::npos, __rhs, __rhs_len) == 0;</span></span>
+<span id="L3739"><span class="lineNum">    3739</span> <span class="tlaGNC">          29 :   size_t __rhs_len = _Traits::length(__rhs);</span></span>
+<span id="L3740"><span class="lineNum">    3740</span> <span class="tlaGNC">          29 :   if (__rhs_len != __lhs.size())</span></span>
+<span id="L3741"><span class="lineNum">    3741</span> <span class="tlaGNC">           3 :     return false;</span></span>
+<span id="L3742"><span class="lineNum">    3742</span> <span class="tlaGNC">          26 :   return __lhs.compare(0, _String::npos, __rhs, __rhs_len) == 0;</span></span>
 <span id="L3743"><span class="lineNum">    3743</span>              : #endif</span>
-<span id="L3744"><span class="lineNum">    3744</span> <span class="tlaGNC">          87 : }</span></span>
+<span id="L3744"><span class="lineNum">    3744</span> <span class="tlaGNC">          29 : }</span></span>
 <span id="L3745"><span class="lineNum">    3745</span>              : </span>
 <span id="L3746"><span class="lineNum">    3746</span>              : #if _LIBCPP_STD_VER &gt;= 20</span>
 <span id="L3747"><span class="lineNum">    3747</span>              : </span>

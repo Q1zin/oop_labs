@@ -18,6 +18,14 @@ private:
     int num_bits; ///< Number of bits in the array
     std::vector<unsigned long> data; ///< Storage for the bits in blocks of unsigned long
 
+    /**
+    * @brief Generates a bitmask with a single bit set at the specified index.
+    *
+    * @param[in] num_bits Index of the bit to be set in the mask.
+    * @return A bitmask with the bit at the given index set to 1.
+    */
+    unsigned long getBitMask(int num_bits) const;
+
 public:
     /**
      * @brief Default constructor. Initializes an empty BitArray.

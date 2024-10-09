@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">75.0&nbsp;%</td>
@@ -97,7 +97,7 @@
 <span id="L35"><span class="lineNum">      35</span>              : // of elements as opposed to a number of bytes.</span>
 <span id="L36"><span class="lineNum">      36</span>              : enum class __element_count : size_t {};</span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">        1149 : inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 size_t __constexpr_strlen(const char* __str) {</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">         383 : inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 size_t __constexpr_strlen(const char* __str) {</span></span>
 <span id="L39"><span class="lineNum">      39</span>              :   // GCC currently doesn't support __builtin_strlen for heap-allocated memory during constant evaluation.</span>
 <span id="L40"><span class="lineNum">      40</span>              :   // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=70816</span>
 <span id="L41"><span class="lineNum">      41</span>              : #ifdef _LIBCPP_COMPILER_GCC</span>
@@ -108,7 +108,7 @@
 <span id="L46"><span class="lineNum">      46</span>              :     return __i;</span>
 <span id="L47"><span class="lineNum">      47</span>              :   }</span>
 <span id="L48"><span class="lineNum">      48</span>              : #endif</span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        1149 :   return __builtin_strlen(__str);</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">         383 :   return __builtin_strlen(__str);</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : }</span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
 <span id="L52"><span class="lineNum">      52</span>              : // Because of __libcpp_is_trivially_lexicographically_comparable we know that comparing the object representations is</span>
@@ -149,11 +149,11 @@
 <span id="L87"><span class="lineNum">      87</span>              : // of invoking it on every object individually.</span>
 <span id="L88"><span class="lineNum">      88</span>              : template &lt;class _Tp, class _Up&gt;</span>
 <span id="L89"><span class="lineNum">      89</span>              : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 bool</span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          24 : __constexpr_memcmp_equal(const _Tp* __lhs, const _Up* __rhs, __element_count __n) {</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">           8 : __constexpr_memcmp_equal(const _Tp* __lhs, const _Up* __rhs, __element_count __n) {</span></span>
 <span id="L91"><span class="lineNum">      91</span>              :   static_assert(__libcpp_is_trivially_equality_comparable&lt;_Tp, _Up&gt;::value,</span>
 <span id="L92"><span class="lineNum">      92</span>              :                 &quot;_Tp and _Up have to be trivially equality comparable&quot;);</span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          24 :   auto __count = static_cast&lt;size_t&gt;(__n);</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           8 :   auto __count = static_cast&lt;size_t&gt;(__n);</span></span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
 <span id="L96"><span class="lineNum">      96</span>              :   if (__libcpp_is_constant_evaluated()) {</span>
 <span id="L97"><span class="lineNum">      97</span>              : #ifdef _LIBCPP_COMPILER_CLANG_BASED</span>
@@ -170,7 +170,7 @@
 <span id="L108"><span class="lineNum">     108</span>              :     }</span>
 <span id="L109"><span class="lineNum">     109</span>              :     return true;</span>
 <span id="L110"><span class="lineNum">     110</span>              :   } else {</span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">          24 :     return __builtin_memcmp(__lhs, __rhs, __count * sizeof(_Tp)) == 0;</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           8 :     return __builtin_memcmp(__lhs, __rhs, __count * sizeof(_Tp)) == 0;</span></span>
 <span id="L112"><span class="lineNum">     112</span>              :   }</span>
 <span id="L113"><span class="lineNum">     113</span>              : }</span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
@@ -254,8 +254,8 @@
 <span id="L192"><span class="lineNum">     192</span>              : </span>
 <span id="L193"><span class="lineNum">     193</span>              : template &lt;class _Tp, class _Up, __enable_if_t&lt;__is_always_bitcastable&lt;_Up, _Tp&gt;::value, int&gt; = 0&gt;</span>
 <span id="L194"><span class="lineNum">     194</span>              : _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 _Tp*</span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC tlaBgGNC">          66 : __constexpr_memmove(_Tp* __dest, _Up* __src, __element_count __n) {</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          66 :   size_t __count = static_cast&lt;size_t&gt;(__n);</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC tlaBgGNC">          22 : __constexpr_memmove(_Tp* __dest, _Up* __src, __element_count __n) {</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          22 :   size_t __count = static_cast&lt;size_t&gt;(__n);</span></span>
 <span id="L197"><span class="lineNum">     197</span>              :   if (__libcpp_is_constant_evaluated()) {</span>
 <span id="L198"><span class="lineNum">     198</span>              : #ifdef _LIBCPP_COMPILER_CLANG_BASED</span>
 <span id="L199"><span class="lineNum">     199</span>              :     if (is_same&lt;__remove_cv_t&lt;_Tp&gt;, __remove_cv_t&lt;_Up&gt; &gt;::value) {</span>
@@ -270,10 +270,10 @@
 <span id="L208"><span class="lineNum">     208</span>              :       for (size_t __i = 0; __i != __count; ++__i)</span>
 <span id="L209"><span class="lineNum">     209</span>              :         std::__assign_trivially_copyable(__dest[__i], __src[__i]);</span>
 <span id="L210"><span class="lineNum">     210</span>              :     }</span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          66 :   } else if (__count &gt; 0) {</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          66 :     ::__builtin_memmove(__dest, __src, (__count - 1) * sizeof(_Tp) + __libcpp_datasizeof&lt;_Tp&gt;::value);</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          66 :   }</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">          66 :   return __dest;</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          22 :   } else if (__count &gt; 0) {</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          22 :     ::__builtin_memmove(__dest, __src, (__count - 1) * sizeof(_Tp) + __libcpp_datasizeof&lt;_Tp&gt;::value);</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          22 :   }</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">          22 :   return __dest;</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : }</span>
 <span id="L216"><span class="lineNum">     216</span>              : </span>
 <span id="L217"><span class="lineNum">     217</span>              : _LIBCPP_END_NAMESPACE_STD</span>

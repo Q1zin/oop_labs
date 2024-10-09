@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -112,7 +112,7 @@
 <span id="L50"><span class="lineNum">      50</span>              :   streambuf_type* __sbuf_;</span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
 <span id="L52"><span class="lineNum">      52</span>              : public:</span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">        2754 :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator(ostream_type&amp; __s) _NOEXCEPT : __sbuf_(__s.rdbuf()) {}</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">         918 :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator(ostream_type&amp; __s) _NOEXCEPT : __sbuf_(__s.rdbuf()) {}</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator(streambuf_type* __s) _NOEXCEPT : __sbuf_(__s) {}</span>
 <span id="L55"><span class="lineNum">      55</span>              :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator&amp; operator=(_CharT __c) {</span>
 <span id="L56"><span class="lineNum">      56</span>              :     if (__sbuf_ &amp;&amp; traits_type::eq_int_type(__sbuf_-&gt;sputc(__c), traits_type::eof()))</span>
@@ -122,7 +122,7 @@
 <span id="L60"><span class="lineNum">      60</span>              :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator&amp; operator*() { return *this; }</span>
 <span id="L61"><span class="lineNum">      61</span>              :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator&amp; operator++() { return *this; }</span>
 <span id="L62"><span class="lineNum">      62</span>              :   _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator&amp; operator++(int) { return *this; }</span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        1377 :   _LIBCPP_HIDE_FROM_ABI bool failed() const _NOEXCEPT { return __sbuf_ == nullptr; }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         459 :   _LIBCPP_HIDE_FROM_ABI bool failed() const _NOEXCEPT { return __sbuf_ == nullptr; }</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span>              :   template &lt;class _Ch, class _Tr&gt;</span>
 <span id="L66"><span class="lineNum">      66</span>              :   friend _LIBCPP_HIDE_FROM_ABI ostreambuf_iterator&lt;_Ch, _Tr&gt; __pad_and_output(</span>

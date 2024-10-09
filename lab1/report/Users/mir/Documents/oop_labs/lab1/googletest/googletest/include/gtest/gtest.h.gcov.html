@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">59.0&nbsp;%</td>
@@ -1414,15 +1414,15 @@
 <span id="L1352"><span class="lineNum">    1352</span>              : </span>
 <span id="L1353"><span class="lineNum">    1353</span>              : // The helper function for {ASSERT|EXPECT}_EQ.</span>
 <span id="L1354"><span class="lineNum">    1354</span>              : template &lt;typename T1, typename T2&gt;</span>
-<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaGNC tlaBgGNC">         240 : AssertionResult CmpHelperEQ(const char* lhs_expression,</span></span>
+<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaGNC tlaBgGNC">          80 : AssertionResult CmpHelperEQ(const char* lhs_expression,</span></span>
 <span id="L1356"><span class="lineNum">    1356</span>              :                             const char* rhs_expression, const T1&amp; lhs,</span>
 <span id="L1357"><span class="lineNum">    1357</span>              :                             const T2&amp; rhs) {</span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC">         240 :   if (lhs == rhs) {</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaGNC">         240 :     return AssertionSuccess();</span></span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC">          80 :   if (lhs == rhs) {</span></span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaGNC">          80 :     return AssertionSuccess();</span></span>
 <span id="L1360"><span class="lineNum">    1360</span>              :   }</span>
 <span id="L1361"><span class="lineNum">    1361</span>              : </span>
 <span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC tlaBgUNC">           0 :   return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);</span></span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaGNC tlaBgGNC">         240 : }</span></span>
+<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaGNC tlaBgGNC">          80 : }</span></span>
 <span id="L1364"><span class="lineNum">    1364</span>              : </span>
 <span id="L1365"><span class="lineNum">    1365</span>              : class EqHelper {</span>
 <span id="L1366"><span class="lineNum">    1366</span>              :  public:</span>
@@ -1433,10 +1433,10 @@
 <span id="L1371"><span class="lineNum">    1371</span>              :       // and the other is the null pointer constant.</span>
 <span id="L1372"><span class="lineNum">    1372</span>              :       typename std::enable_if&lt;!std::is_integral&lt;T1&gt;::value ||</span>
 <span id="L1373"><span class="lineNum">    1373</span>              :                               !std::is_pointer&lt;T2&gt;::value&gt;::type* = nullptr&gt;</span>
-<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaGNC">         240 :   static AssertionResult Compare(const char* lhs_expression,</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaGNC">          80 :   static AssertionResult Compare(const char* lhs_expression,</span></span>
 <span id="L1375"><span class="lineNum">    1375</span>              :                                  const char* rhs_expression, const T1&amp; lhs,</span>
 <span id="L1376"><span class="lineNum">    1376</span>              :                                  const T2&amp; rhs) {</span>
-<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">         240 :     return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);</span></span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">          80 :     return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);</span></span>
 <span id="L1378"><span class="lineNum">    1378</span>              :   }</span>
 <span id="L1379"><span class="lineNum">    1379</span>              : </span>
 <span id="L1380"><span class="lineNum">    1380</span>              :   // With this overloaded version, we allow anonymous enums to be used</span>
@@ -2352,7 +2352,7 @@
 <span id="L2290"><span class="lineNum">    2290</span>              : // namespace and has an all-caps name.</span>
 <span id="L2291"><span class="lineNum">    2291</span>              : int RUN_ALL_TESTS() GTEST_MUST_USE_RESULT_;</span>
 <span id="L2292"><span class="lineNum">    2292</span>              : </span>
-<span id="L2293"><span class="lineNum">    2293</span> <span class="tlaGNC">           3 : inline int RUN_ALL_TESTS() { return ::testing::UnitTest::GetInstance()-&gt;Run(); }</span></span>
+<span id="L2293"><span class="lineNum">    2293</span> <span class="tlaGNC">           1 : inline int RUN_ALL_TESTS() { return ::testing::UnitTest::GetInstance()-&gt;Run(); }</span></span>
 <span id="L2294"><span class="lineNum">    2294</span>              : </span>
 <span id="L2295"><span class="lineNum">    2295</span>              : GTEST_DISABLE_MSC_WARNINGS_POP_()  //  4251</span>
 <span id="L2296"><span class="lineNum">    2296</span>              : </span>

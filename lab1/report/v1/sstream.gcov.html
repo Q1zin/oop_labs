@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">50.0&nbsp;%</td>
@@ -384,7 +384,7 @@
 <span id="L322"><span class="lineNum">     322</span>              :   // [stringbuf.cons] constructors:</span>
 <span id="L323"><span class="lineNum">     323</span>              :   _LIBCPP_HIDE_FROM_ABI basic_stringbuf() : __hm_(nullptr), __mode_(ios_base::in | ios_base::out) {}</span>
 <span id="L324"><span class="lineNum">     324</span>              : </span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC tlaBgGNC">         594 :   _LIBCPP_HIDE_FROM_ABI explicit basic_stringbuf(ios_base::openmode __wch) : __hm_(nullptr), __mode_(__wch) {}</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC tlaBgGNC">         198 :   _LIBCPP_HIDE_FROM_ABI explicit basic_stringbuf(ios_base::openmode __wch) : __hm_(nullptr), __mode_(__wch) {}</span></span>
 <span id="L326"><span class="lineNum">     326</span>              : </span>
 <span id="L327"><span class="lineNum">     327</span>              :   _LIBCPP_HIDE_FROM_ABI explicit basic_stringbuf(const string_type&amp; __s,</span>
 <span id="L328"><span class="lineNum">     328</span>              :                                                  ios_base::openmode __wch = ios_base::in | ios_base::out)</span>
@@ -1068,8 +1068,8 @@
 <span id="L1006"><span class="lineNum">    1006</span>              : </span>
 <span id="L1007"><span class="lineNum">    1007</span>              : public:</span>
 <span id="L1008"><span class="lineNum">    1008</span>              :   // [stringstream.cons] constructors</span>
-<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">         594 :   _LIBCPP_HIDE_FROM_ABI basic_stringstream()</span></span>
-<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">         594 :       : basic_iostream&lt;_CharT, _Traits&gt;(&amp;__sb_), __sb_(ios_base::in | ios_base::out) {}</span></span>
+<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">         198 :   _LIBCPP_HIDE_FROM_ABI basic_stringstream()</span></span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">         198 :       : basic_iostream&lt;_CharT, _Traits&gt;(&amp;__sb_), __sb_(ios_base::in | ios_base::out) {}</span></span>
 <span id="L1011"><span class="lineNum">    1011</span>              : </span>
 <span id="L1012"><span class="lineNum">    1012</span>              :   _LIBCPP_HIDE_FROM_ABI explicit basic_stringstream(ios_base::openmode __wch)</span>
 <span id="L1013"><span class="lineNum">    1013</span>              :       : basic_iostream&lt;_CharT, _Traits&gt;(&amp;__sb_), __sb_(__wch) {}</span>
@@ -1124,7 +1124,7 @@
 <span id="L1062"><span class="lineNum">    1062</span>              :   }</span>
 <span id="L1063"><span class="lineNum">    1063</span>              : </span>
 <span id="L1064"><span class="lineNum">    1064</span>              : #if _LIBCPP_STD_VER &lt;= 17 || defined(_LIBCPP_BUILDING_LIBRARY)</span>
-<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaGNC">         297 :   _LIBCPP_HIDE_FROM_ABI string_type str() const { return __sb_.str(); }</span></span>
+<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaGNC">          99 :   _LIBCPP_HIDE_FROM_ABI string_type str() const { return __sb_.str(); }</span></span>
 <span id="L1066"><span class="lineNum">    1066</span>              : #else</span>
 <span id="L1067"><span class="lineNum">    1067</span>              :   _LIBCPP_HIDE_FROM_ABI_SSTREAM string_type str() const&amp; { return __sb_.str(); }</span>
 <span id="L1068"><span class="lineNum">    1068</span>              : </span>

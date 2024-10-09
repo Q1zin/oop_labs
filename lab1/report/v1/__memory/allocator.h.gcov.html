@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2024-10-07 01:54:53</td>
+            <td class="headerValue">2024-10-10 02:54:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">90.0&nbsp;%</td>
@@ -152,7 +152,7 @@
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span>              : template &lt;class _Unique&gt;</span>
 <span id="L92"><span class="lineNum">      92</span>              : struct __non_trivial_if&lt;true, _Unique&gt; {</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">        2568 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR __non_trivial_if() _NOEXCEPT {}</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">         856 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR __non_trivial_if() _NOEXCEPT {}</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : };</span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
 <span id="L96"><span class="lineNum">      96</span>              : // allocator</span>
@@ -173,18 +173,18 @@
 <span id="L111"><span class="lineNum">     111</span>              :   _LIBCPP_DEPRECATED_IN_CXX23 typedef true_type is_always_equal;</span>
 <span id="L112"><span class="lineNum">     112</span>              : #endif</span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        2568 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 allocator() _NOEXCEPT = default;</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         856 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 allocator() _NOEXCEPT = default;</span></span>
 <span id="L115"><span class="lineNum">     115</span>              : </span>
 <span id="L116"><span class="lineNum">     116</span>              :   template &lt;class _Up&gt;</span>
 <span id="L117"><span class="lineNum">     117</span>              :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 allocator(const allocator&lt;_Up&gt;&amp;) _NOEXCEPT {}</span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">         249 :   _LIBCPP_NODISCARD_AFTER_CXX17 _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Tp* allocate(size_t __n) {</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         249 :     if (__n &gt; allocator_traits&lt;allocator&gt;::max_size(*this))</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          83 :   _LIBCPP_NODISCARD_AFTER_CXX17 _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Tp* allocate(size_t __n) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          83 :     if (__n &gt; allocator_traits&lt;allocator&gt;::max_size(*this))</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC tlaBgUNC">           0 :       __throw_bad_array_new_length();</span></span>
 <span id="L122"><span class="lineNum">     122</span>              :     if (__libcpp_is_constant_evaluated()) {</span>
 <span id="L123"><span class="lineNum">     123</span>              :       return static_cast&lt;_Tp*&gt;(::operator new(__n * sizeof(_Tp)));</span>
 <span id="L124"><span class="lineNum">     124</span>              :     } else {</span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC tlaBgGNC">         249 :       return static_cast&lt;_Tp*&gt;(std::__libcpp_allocate(__n * sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp)));</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC tlaBgGNC">          83 :       return static_cast&lt;_Tp*&gt;(std::__libcpp_allocate(__n * sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp)));</span></span>
 <span id="L126"><span class="lineNum">     126</span>              :     }</span>
 <span id="L127"><span class="lineNum">     127</span>              :   }</span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>
@@ -194,13 +194,13 @@
 <span id="L132"><span class="lineNum">     132</span>              :   }</span>
 <span id="L133"><span class="lineNum">     133</span>              : #endif</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">          63 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void deallocate(_Tp* __p, size_t __n) _NOEXCEPT {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">          21 :   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 void deallocate(_Tp* __p, size_t __n) _NOEXCEPT {</span></span>
 <span id="L136"><span class="lineNum">     136</span>              :     if (__libcpp_is_constant_evaluated()) {</span>
 <span id="L137"><span class="lineNum">     137</span>              :       ::operator delete(__p);</span>
 <span id="L138"><span class="lineNum">     138</span>              :     } else {</span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          63 :       std::__libcpp_deallocate((void*)__p, __n * sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp));</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          21 :       std::__libcpp_deallocate((void*)__p, __n * sizeof(_Tp), _LIBCPP_ALIGNOF(_Tp));</span></span>
 <span id="L140"><span class="lineNum">     140</span>              :     }</span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">          63 :   }</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">          21 :   }</span></span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
 <span id="L143"><span class="lineNum">     143</span>              :   // C++20 Removed members</span>
 <span id="L144"><span class="lineNum">     144</span>              : #if _LIBCPP_STD_VER &lt;= 17 || defined(_LIBCPP_ENABLE_CXX20_REMOVED_ALLOCATOR_MEMBERS)</span>
@@ -226,16 +226,16 @@
 <span id="L164"><span class="lineNum">     164</span>              :     return allocate(__n);</span>
 <span id="L165"><span class="lineNum">     165</span>              :   }</span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">         564 :   _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_HIDE_FROM_ABI size_type max_size() const _NOEXCEPT {</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">         564 :     return size_type(~0) / sizeof(_Tp);</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">         188 :   _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_HIDE_FROM_ABI size_type max_size() const _NOEXCEPT {</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">         188 :     return size_type(~0) / sizeof(_Tp);</span></span>
 <span id="L169"><span class="lineNum">     169</span>              :   }</span>
 <span id="L170"><span class="lineNum">     170</span>              : </span>
 <span id="L171"><span class="lineNum">     171</span>              :   template &lt;class _Up, class... _Args&gt;</span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         213 :   _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_HIDE_FROM_ABI void construct(_Up* __p, _Args&amp;&amp;... __args) {</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         213 :     ::new ((void*)__p) _Up(std::forward&lt;_Args&gt;(__args)...);</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">         213 :   }</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          71 :   _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_HIDE_FROM_ABI void construct(_Up* __p, _Args&amp;&amp;... __args) {</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          71 :     ::new ((void*)__p) _Up(std::forward&lt;_Args&gt;(__args)...);</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">          71 :   }</span></span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">         111 :   _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_HIDE_FROM_ABI void destroy(pointer __p) { __p-&gt;~_Tp(); }</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">          37 :   _LIBCPP_DEPRECATED_IN_CXX17 _LIBCPP_HIDE_FROM_ABI void destroy(pointer __p) { __p-&gt;~_Tp(); }</span></span>
 <span id="L177"><span class="lineNum">     177</span>              : #endif</span>
 <span id="L178"><span class="lineNum">     178</span>              : };</span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
