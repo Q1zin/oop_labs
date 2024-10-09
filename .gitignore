@@ -1,3 +1,11 @@
+**/a-BitArray.gcno
+**/a-BitArray.gcda
+**/xa-BitArray.gcno
+**/a-lab1_tests.gcda
+**/a-lab1_tests.gcno
+**/gcd.info
+**/googletest/
+
 **/cmake-build-debug
 **/.idea
 **/.DS_Store
