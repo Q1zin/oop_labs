@@ -30,6 +30,8 @@ public slots:
     void nextLevel();
     void pauseGame();
     void gameOver();
+    void resumeGame();
+
 
 signals:
     void startGame();
@@ -39,6 +41,7 @@ private:
     void checkVictory(Player *player, ITexture *victoryZone, ITexture* closeFinish);
     void startVictoryCheck(ITexture *victoryZone, ITexture* closeFinish);
     QPushButton* createButton(const QString& text, const QPoint& position, const QSize& size = QSize(200, 50));
+    QGraphicsTextItem* createText(const QString& text, const QPoint& position, const int size = 20);
     QGraphicsScene* scene;
     SoundManager* soundManager;
     LevelsSettings* levelSettings;
@@ -52,6 +55,11 @@ private:
     bool in_game;
     bool in_pause;
     void clearUI();
+
+    QGraphicsRectItem* pauseOverlay;
+    QGraphicsRectItem* resultBox;
+    QPushButton* resumeButton;
+    QPushButton* mainMenuButton;
 };
 
 #endif // UIMANAGER_H

@@ -34,7 +34,8 @@ void LevelsSettings::loadLevel(int lvl, QGraphicsScene *scene, Player* player) {
 
 void LevelsSettings::setBestTime(int lvl, int time) {
     if (lvl - 1 < 0 && lvl - 1 >= levels.size()) return;
-    if (levels[lvl - 1]->getBestTime() == 0 || time < levels[lvl - 1]->getBestTime()) {
+    int bestTime = levels[lvl - 1]->getBestTime();
+    if (bestTime == 0 || time < bestTime) {
         levels[lvl - 1]->setBestTime(time);
         scoreManager->saveBestScore(lvl, time);
     }

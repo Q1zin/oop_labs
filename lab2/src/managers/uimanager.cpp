@@ -45,23 +45,19 @@ void UiManager::showMainMenu()
     in_pause = false;
 
     for (int lvlIdx = 1; lvlIdx <= lvl_count; lvlIdx++) {
-        QGraphicsTextItem* timeText;
         int best_time = levelSettings->getBestTime(lvlIdx);
         if (best_time) {
-            timeText = new QGraphicsTextItem("Ваше лучшее время: " + QTime::fromMSecsSinceStartOfDay(best_time * 1000).toString("mm:ss"));
+            QGraphicsTextItem* timeText = createText("Ваше лучшее время: " + QTime::fromMSecsSinceStartOfDay(best_time * 1000).toString("mm:ss"), QPoint(520, 100 * lvlIdx + 110));
         } else {
-            timeText = new QGraphicsTextItem("Вы ещё не играли, дак погнали!");
+            QGraphicsTextItem* timeText = createText("Вы ещё не играли, дак погнали!", QPoint(520, 100 * lvlIdx + 110));
         }
-        timeText->setDefaultTextColor(Qt::black);
-        timeText->setFont(QFont("Montserrat", 16));
-        timeText->setPos(520, 100 * lvlIdx + 110);
-        scene->addItem(timeText);
 
         QPushButton* startButtonLvl = createButton(QString::number(lvlIdx) + " LVL", QPoint(300, 100 + lvlIdx * 100));
         connect(startButtonLvl, &QPushButton::clicked, this, [this, lvlIdx]() { showGameUI(lvlIdx); });
     }
 
     QPushButton* exitButton = createButton("Выйти", QPoint(300, 200 + lvl_count * 100));
+
     connect(exitButton, &QPushButton::clicked, this, &UiManager::exitGame);
 }
 
@@ -116,13 +112,21 @@ void UiManager::startVictoryCheck(ITexture* victoryZone, ITexture* closeFinish) 
     victoryCheckTimer->start(100);
 }
 
-QPushButton *UiManager::createButton(const QString& text, const QPoint& position, const QSize& size)
-{
+QPushButton *UiManager::createButton(const QString& text, const QPoint& position, const QSize& size) {
     QPushButton* button = new QPushButton(text);
     button->setFixedSize(size.width(), size.height());
     button->move(position.x(), position.y());
     scene->addWidget(button);
     return button;
+}
+
+QGraphicsTextItem *UiManager::createText(const QString &text, const QPoint &position, const int size) {
+    QGraphicsTextItem* resultText = new QGraphicsTextItem(text);
+    resultText->setDefaultTextColor(Qt::black);
+    resultText->setFont(QFont("Montserrat", size));
+    resultText->setPos(position.x(), position.y());
+    scene->addItem(resultText);
+    return resultText;
 }
 
 void UiManager::checkVictory(Player* player, ITexture* victoryZone, ITexture* closeFinish) {
@@ -164,17 +168,8 @@ void UiManager::showGameWin() {
     resultBox->setBrush(QBrush(Qt::white));
     scene->addItem(resultBox);
 
-    QGraphicsTextItem* resultText = new QGraphicsTextItem("Вы победили!");
-    resultText->setDefaultTextColor(Qt::black);
-    resultText->setFont(QFont("Montserrat", 20));
-    resultText->setPos(scene->width() / 2 - 75, scene->height() / 2 - 90);
-    scene->addItem(resultText);
-
-    QGraphicsTextItem* timeText = new QGraphicsTextItem("Время: " + elapsedTime);
-    timeText->setDefaultTextColor(Qt::black);
-    timeText->setFont(QFont("Montserrat", 16));
-    timeText->setPos(scene->width() / 2 - 60, scene->height() / 2 - 56);
-    scene->addItem(timeText);
+    QGraphicsTextItem* resultText = createText("Вы победили!", QPoint(scene->width() / 2 - 75, scene->height() / 2 - 90));
+    QGraphicsTextItem* timeText = createText("Время: " + elapsedTime, QPoint(scene->width() / 2 - 60, scene->height() / 2 - 56));
 
     QPushButton* replayButton = createButton("Ещё раз!", QPoint(scene->width() / 2 - 100, scene->height() / 2 + - 10));
     QPushButton* mainMenuButton = createButton("Главное меню", QPoint(scene->width() / 2 - 100, scene->height() / 2 + 110));
@@ -216,37 +211,32 @@ void UiManager::pauseGame()
 
     player->clearFocus();
 
-    QGraphicsRectItem* pauseOverlay = new QGraphicsRectItem(0, 0, scene->width(), scene->height());
+    pauseOverlay = new QGraphicsRectItem(0, 0, scene->width(), scene->height());
     pauseOverlay->setBrush(QBrush(QColor(0, 0, 0, 150)));
     scene->addItem(pauseOverlay);
 
-    QGraphicsRectItem* resultBox = new QGraphicsRectItem(scene->width() / 2 - 150, scene->height() / 2 - 100, 300, 200);
+    resultBox = new QGraphicsRectItem(scene->width() / 2 - 150, scene->height() / 2 - 100, 300, 200);
     resultBox->setBrush(QBrush(Qt::white));
     scene->addItem(resultBox);
 
-    QPushButton* resumeButton = createButton("Вернуться к игре", QPoint(scene->width() / 2 - 100, scene->height() / 2 - 50));
-    QPushButton* mainMenuButton = createButton("Выйти в главное меню", QPoint(scene->width() / 2 - 100, scene->height() / 2 + 10));
+    resumeButton = createButton("Вернуться к игре", QPoint(scene->width() / 2 - 100, scene->height() / 2 - 50));
+    mainMenuButton = createButton("Выйти в главное меню", QPoint(scene->width() / 2 - 100, scene->height() / 2 + 10));
 
-    connect(resumeButton, &QPushButton::clicked, [this, pauseOverlay, resultBox, resumeButton, mainMenuButton]() {
-        scene->removeItem(pauseOverlay);
-        scene->removeItem(resultBox);
-        resumeButton->hide();
-        mainMenuButton->hide();
-        in_game = true;
-        in_pause = false;
-        player->setFocus();
-        animationTimer->start();
-        timer->resume();
-        levelSettings->resumeEnemySpawning(lvl_now);
-    });
+    connect(resumeButton, &QPushButton::clicked, this, &UiManager::resumeGame);
+    connect(mainMenuButton, &QPushButton::clicked, this, &UiManager::showMainMenu);
+}
 
-    connect(mainMenuButton, &QPushButton::clicked, [this, pauseOverlay, resultBox, resumeButton, mainMenuButton]() {
-        scene->removeItem(pauseOverlay);
-        scene->removeItem(resultBox);
-        resumeButton->hide();
-        mainMenuButton->hide();
-        showMainMenu();
-    });
+void UiManager::resumeGame() {
+    pauseOverlay->hide();
+    resultBox->hide();
+    resumeButton->hide();
+    mainMenuButton->hide();
+    in_game = true;
+    in_pause = false;
+    player->setFocus();
+    animationTimer->start();
+    timer->resume();
+    levelSettings->resumeEnemySpawning(lvl_now);
 }
 
 void UiManager::gameOver()
@@ -272,25 +262,8 @@ void UiManager::gameOver()
     QPushButton* restartButton = createButton("Начать сначала", QPoint(scene->width() / 2 - 100, scene->height() / 2 - 50));
     QPushButton* mainMenuButton = createButton("Выйти в главное меню", QPoint(scene->width() / 2 - 100, scene->height() / 2 + 10));
 
-    connect(restartButton, &QPushButton::clicked, [this, pauseOverlay, resultBox, restartButton, mainMenuButton]() {
-        scene->removeItem(pauseOverlay);
-        scene->removeItem(resultBox);
-        restartButton->hide();
-        mainMenuButton->hide();
-        in_game = true;
-        in_pause = false;
-        player->setFocus();
-        timer->reset();
-        showGameUI(lvl_now);
-    });
-
-    connect(mainMenuButton, &QPushButton::clicked, [this, pauseOverlay, resultBox, restartButton, mainMenuButton]() {
-        scene->removeItem(pauseOverlay);
-        scene->removeItem(resultBox);
-        restartButton->hide();
-        mainMenuButton->hide();
-        showMainMenu();
-    });
+    connect(restartButton, &QPushButton::clicked, this, &UiManager::restartGame);
+    connect(mainMenuButton, &QPushButton::clicked, this, &UiManager::showMainMenu);
 }
 
 void UiManager::clearUI()
