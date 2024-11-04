@@ -2,15 +2,16 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <vector>
+
 #include "include/managers/scoremanager.h"
 
-ScoreManager::ScoreManager(const QString &filename, int max_lvl_) : filename(filename)
+ScoreManager::ScoreManager(const QString &filename, int max_lvl_) : filename(filename), max_lvl(max_lvl_), best_times(max_lvl_)
 {
     read_status = false;
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {
-        this->max_lvl = max_lvl_;
-        this->best_times = new int[max_lvl_]();
+        std::fill(best_times.begin(), best_times.end(), 0);
         return;
     }
 
@@ -20,49 +21,38 @@ ScoreManager::ScoreManager(const QString &filename, int max_lvl_) : filename(fil
     QJsonDocument jsonDoc = QJsonDocument::fromJson(fileContent);
 
     if (jsonDoc.isNull()) {
-        this->max_lvl = max_lvl_;
-        this->best_times = new int[max_lvl_]();
+        std::fill(best_times.begin(), best_times.end(), 0);
         return;
     }
 
-    QJsonObject jsonObj = jsonDoc.object();
+    QJsonObject save = jsonDoc.object();
 
-    if (!jsonObj.contains("max_lvl") || !jsonObj["max_lvl"].isDouble()
-        || !jsonObj.contains("best_times") || !jsonObj["best_times"].isArray()) {
-        this->max_lvl = max_lvl_;
-        this->best_times = new int[max_lvl_]();
+    if (!save.contains("max_lvl") || !save["max_lvl"].isDouble()
+        || !save.contains("best_times") || !save["best_times"].isArray()) {
+        std::fill(best_times.begin(), best_times.end(), 0);
         return;
     }
 
-    max_lvl = jsonObj["max_lvl"].toInt();
+    max_lvl = save["max_lvl"].toInt();
 
     if (max_lvl == 0 || max_lvl != max_lvl_) {
-        this->max_lvl = max_lvl_;
-        this->best_times = new int[max_lvl_]();
+        max_lvl = max_lvl_;
+        best_times.resize(max_lvl);
+        std::fill(best_times.begin(), best_times.end(), 0);
         return;
     }
 
-    QJsonArray jsonArray = jsonObj["best_times"].toArray();
-
-    if (jsonArray.size() != max_lvl) {
-        this->max_lvl = max_lvl_;
-        this->best_times = new int[max_lvl_]();
-        return;
-    }
-
-    best_times = new int[max_lvl];
+    QJsonArray best_scores_records = save["best_times"].toArray();
+    best_times.resize(max_lvl);
 
     for (int i = 0; i < max_lvl; ++i) {
-        best_times[i] = jsonArray[i].toInt();
+        best_times[i] = best_scores_records[i].toInt();
     }
 
     read_status = true;
 }
 
-ScoreManager::~ScoreManager()
-{
-    delete best_times;
-}
+ScoreManager::~ScoreManager() {}
 
 void ScoreManager::saveBestScore(int lvl, int score)
 {
@@ -82,16 +72,16 @@ bool ScoreManager::getReadStatus()
 
 void ScoreManager::WriteBestScore()
 {
-    QJsonObject jsonObj;
-    jsonObj["max_lvl"] = max_lvl;
+    QJsonObject save;
+    save["max_lvl"] = max_lvl;
 
-    QJsonArray jsonArray;
+    QJsonArray best_scores_records;
     for (int i = 0; i < max_lvl; i++) {
-        jsonArray.append(best_times[i]);
+        best_scores_records.append(best_times[i]);
     }
-    jsonObj["best_times"] = jsonArray;
+    save["best_times"] = best_scores_records;
 
-    QJsonDocument jsonDoc(jsonObj);
+    QJsonDocument jsonDoc(save);
     QFile file(filename);
     if (file.open(QIODevice::WriteOnly)) {
         file.write(jsonDoc.toJson(QJsonDocument::Compact));

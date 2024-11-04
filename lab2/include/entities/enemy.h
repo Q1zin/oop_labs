@@ -11,7 +11,7 @@ class Enemy : public Entity
 {
     Q_OBJECT
 public:
-    Enemy(QGraphicsScene* scene, int x, int y, int width, int height, int hp, const QString& img, Player* victim);
+    Enemy(QGraphicsScene* scene, const QPoint& position, const QSize& size, int hp, const QString& img, Player* victim);
     Enemy();
 
     ~Enemy();

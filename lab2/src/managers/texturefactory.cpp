@@ -3,18 +3,18 @@
 #include "include/textures/invisibletexture.h"
 #include "include/textures/coinstexture.h"
 
-ITexture *TextureFactory::create(const QString& textureType, int width, int height, int x, int y, const QString& img) {
+ITexture *TextureFactory::create(const QString& textureType, const QPoint& position, const QSize& size, const QString& img) {
     if (textureType == "regular") {
         if (img != "") {
-            return new Texture(width, height, x, y, img);
+            return new Texture(position, size, img);
         } else {
-            return new Texture(width, height, x, y);
+            return new Texture(position, size);
         }
 
     } else if (textureType == "invisible") {
-        return new InvisibleTexture(width, height, x, y, img);
+        return new InvisibleTexture(position, size, img);
     } else if (textureType == "coin") {
-        return new CoinsTexture(x, y);
+        return new CoinsTexture(position);
     } else {
         return nullptr;
     }

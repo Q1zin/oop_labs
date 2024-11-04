@@ -6,7 +6,7 @@
 
 class CoinsTexture : public ITexture {
 public:
-    CoinsTexture(int x, int y);
+    CoinsTexture(const QPoint& position);
     enum { Type = UserType + 5 };
     int type() const override;
 };

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/save">
+        <file>best_times.json</file>
+    </qresource>
+</RCC>

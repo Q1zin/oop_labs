@@ -2,12 +2,12 @@
 #include <QTimer>
 #include "include/utils/timer.h"
 
-Timer::Timer(QGraphicsScene* scene, int x, int y)
+Timer::Timer(QGraphicsScene* scene, const QPoint& position)
     : QGraphicsTextItem(0), scene(scene), timer(new QTimer(this)), elapsedTime(0, 0) {
     connect(timer, &QTimer::timeout, this, &Timer::updateTime);
 
     timer->start(1000);
-    setPos(x, y);
+    setPos(position.x(), position.y());
     setDefaultTextColor(Qt::black);
     setFont(QFont("Montserrat", 40));
     scene->addItem(this);

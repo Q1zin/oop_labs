@@ -6,12 +6,11 @@
 
 class Bullet : public QGraphicsLineItem {
 public:
-    Bullet(QPointF initPos, int direction, QGraphicsScene* scene);
+    Bullet(QPointF initPos, int direction);
 
 private:
     void advance(int phase);
 
-    QGraphicsScene* scene;
     int x_speed;
 };
 

@@ -2,6 +2,8 @@
 #define SCOREMANAGER_H
 
 #include <QFile>
+#include <vector>
+#include <QString>
 
 class ScoreManager
 {
@@ -13,11 +15,11 @@ public:
     bool getReadStatus();
 
 private:
-    void loadBestScore();
     void WriteBestScore();
+
     QString filename;
     int max_lvl;
-    int* best_times;
+    std::vector<int> best_times;
     bool read_status;
 };
 

@@ -8,8 +8,8 @@
 #define BULLET_LENGTH 10
 #define BULLET_SPEED 5
 
-Bullet::Bullet(QPointF initPos, int direction, QGraphicsScene* scene)
-    : QGraphicsLineItem(0), scene(scene) {
+Bullet::Bullet(QPointF initPos, int direction)
+    : QGraphicsLineItem(0) {
     if (direction == 0) {
         x_speed = -BULLET_SPEED;
     } else {
@@ -37,7 +37,7 @@ void Bullet::advance(int phase)
             }
         }
 
-        if (this->x() < 0 || this->x() + BULLET_LENGTH > scene->width()){
+        if (x() < 0 || x() + BULLET_LENGTH > scene()->width()){
             delete this;
         }
     }

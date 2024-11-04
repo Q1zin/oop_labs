@@ -5,8 +5,8 @@
 
 #define ENEMY_SPEED 2
 
-Enemy::Enemy(QGraphicsScene* scene, int x, int y, int width, int height, int hp, const QString& img, Player* victim)
-    : Entity(scene, x, y, width, height, img), victim(victim), hp(hp) {
+Enemy::Enemy(QGraphicsScene* scene, const QPoint& position, const QSize& size, int hp, const QString& img, Player* victim)
+    : Entity(scene, position, size, img), victim(victim), hp(hp) {
     HuntTimer = new QTimer(this);
     connect(HuntTimer, &QTimer::timeout, this, &Enemy::checkBlock);
     HuntTimer->start(100);
@@ -26,11 +26,10 @@ Enemy::~Enemy()
 
 void Enemy::advance(int phase) {
     if (phase) {
-        allowed_go_left_old = allowed_go_left;
-        allowed_go_right_old = allowed_go_right;
-        updateAllowedY();
-        updateAllowedX();
-        logicGo();
+        allowed_go_left_old = allowedMovement.left;
+        allowed_go_right_old = allowedMovement.right;
+        updataAllowedMovement();
+        move();
         logicJump();
         logicHunt();
     } else {
@@ -48,11 +47,11 @@ void Enemy::advance(int phase) {
 void Enemy::checkBlock(){
     qreal playerX = victim->x();
     if (std::abs(playerX - x()) < 5) {
-        x_speed = 0;
+        speed.setX(0);
         return;
     }
 
-    if (allowed_go_left_old == allowed_go_left || allowed_go_right_old == allowed_go_right) {
+    if (allowed_go_left_old == allowedMovement.left || allowed_go_right_old == allowedMovement.right) {
         jump();
     }
 }
@@ -66,15 +65,15 @@ void Enemy::logicHunt() {
     qreal playerX = victim->x();
 
     if (std::abs(playerX - x()) < 5) {
-        x_speed = 0;
+        speed.setX(0);
         return;
     }
 
     if (x() < playerX) {
-        x_speed = ENEMY_SPEED;
-        flip("left");
+        speed.setX(ENEMY_SPEED);
+        flip(Left);
     } else if (x() > playerX) {
-        x_speed = -ENEMY_SPEED;
-        flip("right");
+        speed.setX(-ENEMY_SPEED);
+        flip(Right);
     }
 }

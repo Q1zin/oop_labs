@@ -38,7 +38,7 @@ signals:
 private:
     void checkVictory(Player *player, ITexture *victoryZone, ITexture* closeFinish);
     void startVictoryCheck(ITexture *victoryZone, ITexture* closeFinish);
-    QPushButton* createButton(int x, int y, const QString& text, int width = 200, int height = 50);
+    QPushButton* createButton(const QString& text, const QPoint& position, const QSize& size = QSize(200, 50));
     QGraphicsScene* scene;
     SoundManager* soundManager;
     LevelsSettings* levelSettings;

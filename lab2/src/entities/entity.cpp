@@ -12,22 +12,28 @@
 #define GRAVITY 0.2
 #define JUMP_FORCE 5
 
-Entity::Entity(QGraphicsScene* scene, int x, int y, int width, int height, const QString& img)
+Entity::Entity(QGraphicsScene* scene, const QPoint& position, const QSize& size, const QString& img)
     : QObject(0), QGraphicsPixmapItem(0), scene(scene) {
     setPixmap(img);
-    setPixmap(pixmap().scaled(width, height, Qt::KeepAspectRatio));
-    setPos(x, y);
+    setPixmap(pixmap().scaled(size.width(), size.height(), Qt::KeepAspectRatio));
+    setPos(position.x(), position.y());
 }
 
 Entity::Entity() : QObject(0), QGraphicsPixmapItem(0) {}
 
 Entity::~Entity() {}
 
+void Entity::updataAllowedMovement()
+{
+    updateAllowedX();
+    updateAllowedY();
+}
+
 void Entity::updateAllowedX() {
     int dist_left = INIT_MAX_DIST;
     int dist_right = INIT_MAX_DIST;
 
-    int center_man = this->x() + (this->pixmap().width() / 2);
+    int center_man = x() + (pixmap().width() / 2);
 
     for (QGraphicsItem* item : scene->items()) {
         if (item->type() == Texture::Type) {
@@ -38,14 +44,14 @@ void Entity::updateAllowedX() {
             int item_y = position.y();
             int item_height = boundingRect.height();
 
-            if (item_y + item_height >= this->y() && item_y <= this->y() + this->pixmap().height()) {
+            if (item_y + item_height >= y() && item_y <= y() + pixmap().height()) {
                 int gap = item_x - center_man;
 
                 if (gap > 0) {
-                    gap -= this->pixmap().width() / 2;
+                    gap -= pixmap().width() / 2;
                     dist_right = std::min(dist_right, std::abs(gap));
                 } else {
-                    gap += boundingRect.width() + this->pixmap().width() / 2;
+                    gap += boundingRect.width() + pixmap().width() / 2;
                     dist_left = std::min(dist_left, std::abs(gap));
                 }
             }
@@ -53,22 +59,22 @@ void Entity::updateAllowedX() {
     }
 
     if (dist_left == INIT_MAX_DIST) {
-        dist_left = this->x();
+        dist_left = x();
     }
 
     if (dist_right == INIT_MAX_DIST) {
-        dist_right = scene->width() - this->x() - this->pixmap().width();
+        dist_right = scene->width() - x() - pixmap().width();
     }
 
-    allowed_go_left = dist_left - 2;
-    allowed_go_right = dist_right - 2;
+    allowedMovement.left = dist_left - 2;
+    allowedMovement.right = dist_right - 2;
 }
 
 void Entity::updateAllowedY() {
     int dist_up = INIT_MAX_DIST;
     int dist_down = INIT_MAX_DIST;
 
-    int center_man = this->y() + (this->pixmap().height() / 2);
+    int center_man = y() + (pixmap().height() / 2);
 
     for (QGraphicsItem* item : scene->items()) {
         if (item->type() == Texture::Type) {
@@ -79,14 +85,14 @@ void Entity::updateAllowedY() {
             int item_y = position.y();
             int item_width = boundingRect.width();
 
-            if (item_x + item_width >= this->x() && item_x <= this->x() + this->pixmap().width()) {
+            if (item_x + item_width >= x() && item_x <= x() + pixmap().width()) {
                 int gap = item_y - center_man;
 
                 if (gap > 0) {
-                    gap -= this->pixmap().height() / 2;
+                    gap -= pixmap().height() / 2;
                     dist_down = std::min(dist_down, std::abs(gap));
                 } else {
-                    gap += boundingRect.height() + this->pixmap().height() / 2;
+                    gap += boundingRect.height() + pixmap().height() / 2;
                     dist_up = std::min(dist_up, std::abs(gap));
                 }
             }
@@ -94,37 +100,37 @@ void Entity::updateAllowedY() {
     }
 
     if (dist_up == INIT_MAX_DIST) {
-        dist_up = this->y();
+        dist_up = y();
     }
 
     if (dist_down == INIT_MAX_DIST) {
-        dist_down = scene->height() - this->y() - this->pixmap().height();
+        dist_down = scene->height() - y() - pixmap().height();
     }
 
-    allowed_go_up = dist_up - 2;
-    allowed_go_down = dist_down - 2;
+    allowedMovement.up = dist_up - 2;
+    allowedMovement.down = dist_down - 2;
 }
 
-void Entity::logicGo()
+void Entity::move()
 {
-    if (x_speed > 0) {
-        if (allowed_go_right > x_speed) {
-            moveBy(x_speed, 0);
-        } else if (allowed_go_right != 0) {
-            moveBy(allowed_go_right, 0);
+    if (speed.x() > 0) {
+        if (allowedMovement.right > speed.x()) {
+            moveBy(speed.x(), 0);
+        } else if (allowedMovement.right != 0) {
+            moveBy(allowedMovement.right, 0);
         }
-    } else if (x_speed < 0) {
-        if (allowed_go_left > std::abs(x_speed)) {
-            moveBy(x_speed, 0);
-        } else if (allowed_go_left != 0) {
-            moveBy(-allowed_go_left, 0);
+    } else if (speed.x() < 0) {
+        if (allowedMovement.left > std::abs(speed.x())) {
+            moveBy(speed.x(), 0);
+        } else if (allowedMovement.left != 0) {
+            moveBy(-allowedMovement.left, 0);
         }
     }
 }
 
 void Entity::jump()
 {
-    if ((count_jump == 0 && allowed_go_down != 0) || (count_jump == 1)) {
+    if ((count_jump == 0 && allowedMovement.down != 0) || (count_jump == 1)) {
         state_jump = 2;
         y_jump_progress = 0;
     } else if (count_jump == 0) {
@@ -135,22 +141,22 @@ void Entity::jump()
 
 void Entity::logicJump() {
     if (state_jump != 1 && state_jump != 2) {
-        y_speed += GRAVITY;
+        speed.setY(speed.y() + GRAVITY);
 
-        if (allowed_go_down >= y_speed) {
-            moveBy(0, y_speed);
+        if (allowedMovement.down >= speed.y()) {
+            moveBy(0, speed.y());
         } else {
-            moveBy(0, allowed_go_down);
+            moveBy(0, allowedMovement.down);
             state_jump = 0;
             count_jump = 0;
-            y_speed = 0;
+            speed.setY(0);
         }
     } else if (state_jump == 1) {
         count_jump = 1;
 
         if (y_jump_progress < MAX_JUMP_HEIGHT) {
             y_jump_progress += JUMP_FORCE;
-            if (allowed_go_up >= JUMP_FORCE) {
+            if (allowedMovement.up >= JUMP_FORCE) {
                 moveBy(0, -JUMP_FORCE);
             } else {
                 state_jump = 0;
@@ -163,7 +169,7 @@ void Entity::logicJump() {
 
         if (y_jump_progress < MAX_JUMP_HEIGHT) {
             y_jump_progress += JUMP_FORCE;
-            if (allowed_go_up >= JUMP_FORCE) {
+            if (allowedMovement.up >= JUMP_FORCE) {
                 moveBy(0, -JUMP_FORCE);
             } else {
                 state_jump = 0;
@@ -174,17 +180,17 @@ void Entity::logicJump() {
     }
 }
 
-void Entity::flip(const QString& position)
+void Entity::flip(Direction position)
 {
-    if (position == "right" && direction == 0) {
+    if (position == Right && direction == 0) {
         QTransform transform;
         transform.scale(-1, 1);
-        this->setPixmap(pixmap().transformed(transform));
+        setPixmap(pixmap().transformed(transform));
         direction = 1;
-    } else if (position == "left" && direction == 1) {
+    } else if (position == Left && direction == 1) {
         QTransform transform;
         transform.scale(-1, 1);
-        this->setPixmap(pixmap().transformed(transform));
+        setPixmap(pixmap().transformed(transform));
         direction = 0;
     }
 }

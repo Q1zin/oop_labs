@@ -8,10 +8,10 @@
 #include "include/textures/coinstexture.h"
 #include "include/entities/enemy.h"
 
-#define MAN_SPEED 4
+#define PLAYER_MOVE_SPEED 4
 
-Player::Player(QGraphicsScene* scene, int x, int y, int width, int height, const QString& img)
-    : Entity(scene, x, y, width, height, img) {}
+Player::Player(QGraphicsScene* scene, const QPoint& position, const QSize& size, const QString& img)
+    : Entity(scene, position, size, img) {}
 
 Player::~Player() {}
 
@@ -19,23 +19,23 @@ void Player::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_Left:
-        x_speed = -MAN_SPEED;
-        flip("left");
+        speed.setX(-PLAYER_MOVE_SPEED);
+        flip(Left);
         break;
     case Qt::Key_Right:
-        x_speed = MAN_SPEED;
-        flip("right");
+        speed.setX(PLAYER_MOVE_SPEED);
+        flip(Right);
         break;
     case Qt::Key_Up:
         jump();
         break;
     case Qt::Key_Space:
         if (direction == 1) {
-            scene->addItem(new Bullet(mapToScene(QPointF(pixmap().width() , 32)), direction, scene));
+            scene->addItem(new Bullet(mapToScene(QPointF(pixmap().width() , 32)), direction));
         } else {
-            scene->addItem(new Bullet(mapToScene(QPointF(0 - 10, 32)), direction, scene)); // -10 размер пули
+            scene->addItem(new Bullet(mapToScene(QPointF(0 - 10, 32)), direction)); // -10 размер пули
         }
-        emit takeShot();
+        emit takenShot();
         break;
     }
 }
@@ -43,9 +43,9 @@ void Player::keyPressEvent(QKeyEvent *event)
 void Player::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left) {
-        x_speed = 0;
+        speed.setX(0);
     } else if (event->key() == Qt::Key_Right) {
-        x_speed = 0;
+        speed.setX(0);
     }
 }
 
@@ -53,16 +53,15 @@ void Player::keyReleaseEvent(QKeyEvent *event)
 void Player::advance(int phase)
 {
     if (phase) {
-        updateAllowedY();
-        updateAllowedX();
-        logicGo();
+        updataAllowedMovement();
+        move();
         logicJump();
     } else {
         foreach (QGraphicsItem* item, collidingItems()) {
             if (item->type() == CoinsTexture::Type) {
                 delete item;
                 countCoins++;
-                emit takeCoin();
+                emit takenCoin();
             } else if (item->type() == Enemy::Type) {
                 emit heroDied();
             }

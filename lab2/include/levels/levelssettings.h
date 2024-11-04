@@ -12,7 +12,7 @@ public:
 
     void initializeLevels();
     void loadLevel(int lvl, QGraphicsScene* scene, Player* player = nullptr);
-    void updateBestTime(int lvl, int time);
+    void setBestTime(int lvl, int time);
     int getLevelsCount() const;
     int getBestTime(int lvl) const;
     void pauseEnemySpawning(int lvl);

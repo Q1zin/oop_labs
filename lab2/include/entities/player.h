@@ -9,7 +9,7 @@ class Player : public Entity
 {
     Q_OBJECT
 public:
-    Player(QGraphicsScene* scene, int x, int y, int width, int height, const QString& img);
+    Player(QGraphicsScene* scene, const QPoint& position, const QSize& size, const QString& img);
 
     ~Player();
 
@@ -22,8 +22,8 @@ public:
     void setCoins(int count);
 
 signals:
-    void takeCoin();
-    void takeShot();
+    void takenCoin();
+    void takenShot();
     void heroDied();
 
 protected:

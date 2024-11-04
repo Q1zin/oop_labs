@@ -9,6 +9,6 @@
 
 class TextureFactory {
 public:
-    static ITexture* create(const QString& textureType, int width = 0, int height = 0, int x = 0, int y = 0, const QString& img = "");
+    static ITexture* create(const QString& textureType, const QPoint& position = QPoint(0, 0), const QSize& size = QSize(0, 0), const QString& img = "");
 };
 #endif // TEXTUREFACTORY_H

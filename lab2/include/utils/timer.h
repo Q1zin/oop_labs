@@ -9,7 +9,7 @@ class Timer : public QGraphicsTextItem {
     Q_OBJECT
 
 public:
-    Timer(QGraphicsScene* scene, int x, int y);
+    Timer(QGraphicsScene* scene, const QPoint& position);
     ~Timer();
 
     QTime getTime();

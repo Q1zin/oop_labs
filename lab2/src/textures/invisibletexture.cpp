@@ -1,9 +1,9 @@
 #include <QGraphicsPixmapItem>
 #include "include/textures/invisibletexture.h"
 
-InvisibleTexture::InvisibleTexture(int width, int height, int x, int y, const QString& img) : ITexture(0){
-    setPixmap(QPixmap(img).scaled(width, height, Qt::KeepAspectRatio));
-    setPos(x, y);
+InvisibleTexture::InvisibleTexture(const QPoint& position, const QSize& size, const QString& img) : ITexture(0){
+    setPixmap(QPixmap(img).scaled(size.width(), size.height(), Qt::KeepAspectRatio));
+    setPos(position.x(), position.y());
 }
 
 int InvisibleTexture::type() const { return Type; }

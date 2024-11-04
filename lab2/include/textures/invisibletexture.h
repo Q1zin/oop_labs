@@ -6,7 +6,7 @@
 
 class InvisibleTexture : public ITexture {
 public:
-    InvisibleTexture(int width, int height, int x, int y, const QString& img);
+    InvisibleTexture(const QPoint& position, const QSize& size, const QString& img);
     enum { Type = UserType + 4 };
     int type() const override;
 };

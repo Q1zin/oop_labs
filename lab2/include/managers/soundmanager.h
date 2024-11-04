@@ -3,6 +3,7 @@
 
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <memory>
 
 class SoundManager : public QObject
 {
@@ -17,14 +18,14 @@ public slots:
     void setSoundShot();
 
 private:
-    QMediaPlayer *musicPlayer;
-    QMediaPlayer *soundEffectPlayer;
-    QMediaPlayer *soundEffectCoin;
-    QMediaPlayer *soundEffectShot;
-    QAudioOutput *musicOutput;
-    QAudioOutput *soundEffectOutput;
-    QAudioOutput *soundEffectOutputCoin;
-    QAudioOutput *soundEffectOutputShot;
+    std::unique_ptr<QMediaPlayer> musicPlayer;
+    std::unique_ptr<QMediaPlayer> soundEffectPlayer;
+    std::unique_ptr<QMediaPlayer> soundEffectCoin;
+    std::unique_ptr<QMediaPlayer> soundEffectShot;
+    std::unique_ptr<QAudioOutput> musicOutput;
+    std::unique_ptr<QAudioOutput> soundEffectOutput;
+    std::unique_ptr<QAudioOutput> soundEffectOutputCoin;
+    std::unique_ptr<QAudioOutput> soundEffectOutputShot;
 };
 
 #endif // SOUNDMANAGER_H

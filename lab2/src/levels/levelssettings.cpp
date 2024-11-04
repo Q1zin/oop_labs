@@ -7,11 +7,12 @@
 #include "include/levels/secondlevel.h"
 #include "include/levels/thirdlevel.h"
 
+#define TIME_RESET_MOB 5000
+
 LevelsSettings::LevelsSettings()
 {
     initializeLevels();
-    // scoreManager = new ScoreManager(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/best_times.json", getLevelsCount());
-    scoreManager = new ScoreManager("/Users/mir/Realm_of_Rebirth/best_times.json", getLevelsCount());
+    scoreManager = new ScoreManager("./best_times.json", getLevelsCount());
     if (scoreManager->getReadStatus()) {
         for (int i = 1; i <= getLevelsCount(); i++) {
             levels[i - 1]->setBestTime(scoreManager->getBestScore(i));
@@ -31,7 +32,7 @@ void LevelsSettings::loadLevel(int lvl, QGraphicsScene *scene, Player* player) {
     remainingTime = 0;
 }
 
-void LevelsSettings::updateBestTime(int lvl, int time) {
+void LevelsSettings::setBestTime(int lvl, int time) {
     if (lvl - 1 < 0 && lvl - 1 >= levels.size()) return;
     if (levels[lvl - 1]->getBestTime() == 0 || time < levels[lvl - 1]->getBestTime()) {
         levels[lvl - 1]->setBestTime(time);
@@ -69,6 +70,6 @@ void LevelsSettings::resumeEnemySpawning(int lvl) {
     if (remainingTime > 0) {
         enemySpawnTimer->start(remainingTime);
     } else {
-        enemySpawnTimer->start(5000);
+        enemySpawnTimer->start(TIME_RESET_MOB);
     }
 }

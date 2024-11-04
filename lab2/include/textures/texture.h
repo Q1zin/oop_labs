@@ -6,8 +6,8 @@
 
 class Texture : public ITexture {
 public:
-    Texture(int width, int height, int x, int y, const QString& img);
-    Texture(int width, int height, int x, int y);
+    Texture(const QPoint& position, const QSize& size, const QString& img);
+    Texture(const QPoint& position, const QSize& size);
     enum { Type = UserType + 3 };
     int type() const override;
 };

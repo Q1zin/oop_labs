@@ -3,35 +3,48 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QPointF>
+
+enum Direction {
+    Left,
+    Right
+};
+
+struct MovementAllowance {
+    int left = 0;
+    int right = 0;
+    int up = 0;
+    int down = 0;
+};
 
 class Entity : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Entity(QGraphicsScene* scene, int x, int y, int width, int height, const QString& img);
+    Entity(QGraphicsScene* scene, const QPoint& position, const QSize& size, const QString& img);
     Entity();
 
     ~Entity();
 
 protected:
-    void updateAllowedY();
-    void updateAllowedX();
-    void logicGo();
+    void updataAllowedMovement();
+    void move();
     void logicJump();
     void jump();
-    void flip(const QString& position);
+    void flip(Direction position);
 
     QGraphicsScene* scene;
     int direction = 1; // 0 - left, 1 - right
-    int x_speed = 0;
-    float y_speed = 0;
+    QPointF speed = {0 ,0};
     int y_jump_progress = 0;
     int state_jump = 0;
     int count_jump = 0;
-    int allowed_go_left = 0;
-    int allowed_go_right = 0;
-    int allowed_go_up = 0;
-    int allowed_go_down = 0;
+    MovementAllowance allowedMovement = {0, 0, 0, 0};
+
+private:
+    void updateAllowedY();
+    void updateAllowedX();
 };
+
 
 #endif // ENTITY_H

@@ -17,14 +17,14 @@ Game::Game(QWidget *parent)
     , ui(new Ui::Game)
 {
     ui->setupUi(this);
-    this->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect screenGeometry = screen->geometry();
-    int x = (screenGeometry.width() - this->width()) / 2;
-    this->move(x, 0);
+    int x = (screenGeometry.width() - width()) / 2;
+    move(x, 0);
 
-    ui->graphicsView->setGeometry(0, 0, this->width(), this->height());
+    ui->graphicsView->setGeometry(0, 0, width(), height());
 
     QGraphicsScene* scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
