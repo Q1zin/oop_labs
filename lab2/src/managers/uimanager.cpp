@@ -341,14 +341,15 @@ void UiManager::showLevel() {
     if (!levelElements.player) {
         levelElements.player = new Player(scene, QPoint(35, scene->height() - 100), QSize(50, 50), ":/img/man.png");
         levelElements.player->setCoins(0);
-        levelElements.player->setFlag(QGraphicsItem::ItemIsFocusable);
-        levelElements.player->setFocus();
         levelElements.player->setZValue(500);
         scene->addItem(levelElements.player);
+        levelElements.player->setFlag(QGraphicsItem::ItemIsFocusable);
+        levelElements.player->setFocus();
 
         connect(levelElements.player, &Player::takenCoin, soundManager, &SoundManager::setSoundCoin);
         connect(levelElements.player, &Player::takenShot, soundManager, &SoundManager::setSoundShot);
         connect(levelElements.player, &Player::heroDied, this, &UiManager::gameOver);
+        connect(levelElements.player, &Player::pauseGame, this, &UiManager::pauseGame);
     }
 
     if (levelElements.victoryZone) {
@@ -405,6 +406,7 @@ void UiManager::hideLevel() {
         disconnect(levelElements.player, &Player::takenCoin, soundManager, &SoundManager::setSoundCoin);
         disconnect(levelElements.player, &Player::takenShot, soundManager, &SoundManager::setSoundShot);
         disconnect(levelElements.player, &Player::heroDied, this, &UiManager::gameOver);
+        disconnect(levelElements.player, &Player::pauseGame, this, &UiManager::pauseGame);
         delete levelElements.player;
         levelElements.player = nullptr;
     };

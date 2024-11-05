@@ -34,9 +34,9 @@ void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player) {
         {"regular", QPoint(1000, 460), QSize(280, 80)},
         {"regular", QPoint(910, 540), QSize(370, 80)},
         {"regular", QPoint(720, 620), QSize(560, 80)},
-        {"coin", QPoint(75, 110)},  // Размер для монет не указан, предполагается по умолчанию
-        {"coin", QPoint(125, 355)},
-        {"coin", QPoint(1205, 400)}
+        {"coin", QPoint(75, 110), QSize(0, 0)},
+        {"coin", QPoint(125, 355), QSize(0, 0)},
+        {"coin", QPoint(1205, 400), QSize(0, 0)}
     };
 
     std::vector<EnemyData> enemies = {

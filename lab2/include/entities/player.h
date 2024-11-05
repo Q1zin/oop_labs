@@ -5,6 +5,7 @@
 
 #include "include/entities/entity.h"
 #include "include/entities/bullet.h"
+#include "gamecontroller.h"
 
 class Player : public Entity
 {
@@ -20,21 +21,30 @@ public:
     void advance(int phase) override;
 
     int getCoins();
-    void setCoins(int count);
+    void setCoins(int count); 
 
 signals:
     void takenCoin();
     void takenShot();
     void heroDied();
-
-protected:
-    void keyPressEvent(QKeyEvent *event) override;
-    void keyReleaseEvent(QKeyEvent *event) override;
+    void pauseGame();
 
 private:
     void onClearBullet(Bullet* bullet);
     int countCoins = 0;
     std::vector<Bullet*> bulletObj;
+    GameController* controller;
+
+    void onKeyLeftPress();
+    void onKeyRightPress();
+    void onKeyTopPress();
+    void onKeySpacePress();
+    void onKeyEscapePress();
+    void onKeyLeftRelease();
+    void onKeyRightRelease();
+
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
 };
 
 #endif // PLAYER_H

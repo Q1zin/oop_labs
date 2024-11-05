@@ -1,15 +1,29 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
-#include <QObject>
+#include <QWidget>
+#include <QGraphicsScene>
+#include <QKeyEvent>
 
-class GameController : public QObject
+class GameController : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GameController(QObject *parent = nullptr);
+    GameController(QWidget *parent = nullptr);
+
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
 
 signals:
+    void keyLeftPress();
+    void keyRightPress();
+    void keyTopPress();
+    void keySpacePress();
+    void keyEscapePress();
+    void keyLeftRelease();
+    void keyRightRelease();
+
+protected:
 };
 
 #endif // GAMECONTROLLER_H
