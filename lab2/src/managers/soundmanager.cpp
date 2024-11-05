@@ -3,8 +3,7 @@
 #include <memory>
 #include "include/managers/soundmanager.h"
 
-SoundManager::SoundManager() : QObject(0)
-{
+SoundManager::SoundManager() : QObject(0) {
     musicPlayer = std::make_unique<QMediaPlayer>();
     musicOutput = std::make_unique<QAudioOutput>();
     musicOutput->setVolume(50);
@@ -24,47 +23,33 @@ SoundManager::SoundManager() : QObject(0)
 
 SoundManager::~SoundManager() {}
 
-void SoundManager::setSound(const QString& sound)
-{
+void SoundManager::setSound(const QString& sound) {
     if (sound == "menu") {
-        musicPlayer->stop();
-        musicPlayer->setSource(QUrl("qrc:/music/music_menu.mp3"));
-        musicPlayer->setLoops(QMediaPlayer::Infinite);
-        musicPlayer->play();
+        playSound("qrc:/music/music_menu.mp3", QMediaPlayer::Infinite, musicPlayer.get());
     } else if (sound == "game") {
-        musicPlayer->stop();
-        musicPlayer->setSource(QUrl("qrc:/music/music_game.mp3"));
-        musicPlayer->setLoops(QMediaPlayer::Infinite);
-        musicPlayer->play();
+        playSound("qrc:/music/music_game.mp3", QMediaPlayer::Infinite, musicPlayer.get());
     } else if (sound == "win") {
-        musicPlayer->stop();
-        musicPlayer->setSource(QUrl("qrc:/music/music_win.wav"));
-        musicPlayer->setLoops(1);
-        musicPlayer->play();
+        playSound("qrc:/music/music_win.wav", 1, musicPlayer.get());
     } else if (sound == "game_over") {
-        musicPlayer->stop();
-        musicPlayer->setSource(QUrl("qrc:/music/music_game_over.mp3"));
-        musicPlayer->setLoops(1);
-        musicPlayer->play();
+        playSound("qrc:/music/music_game_over.mp3", 1, musicPlayer.get());
     } else if (sound == "collected_coin") {
-        soundEffectCoin->stop();
-        soundEffectCoin->setSource(QUrl("qrc:/music/collected_coin.mp3"));
-        soundEffectCoin->setLoops(1);
-        soundEffectCoin->play();
+        playSound("qrc:/music/collected_coin.mp3", 1, soundEffectCoin.get());
     } else if (sound == "shot") {
-        soundEffectShot->stop();
-        soundEffectShot->setSource(QUrl("qrc:/music/laser.mp3"));
-        soundEffectShot->setLoops(1);
-        soundEffectShot->play();
+        playSound("qrc:/music/laser.mp3", 1, soundEffectShot.get());
     }
 }
 
-void SoundManager::setSoundCoin()
-{
+void SoundManager::setSoundCoin() {
     setSound("collected_coin");
 }
 
-void SoundManager::setSoundShot()
-{
+void SoundManager::setSoundShot() {
     setSound("shot");
+}
+
+void SoundManager::playSound(const QString &source, int loops, QMediaPlayer *musicPlayer) {
+    musicPlayer->stop();
+    musicPlayer->setSource(QUrl(source));
+    musicPlayer->setLoops(loops);
+    musicPlayer->play();
 }

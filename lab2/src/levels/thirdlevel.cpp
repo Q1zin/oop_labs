@@ -23,8 +23,7 @@ struct EnemyData {
     QString img;
 };
 
-void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player)
-{
+void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     std::vector<TextureData> textures = {
         {"regular", QPoint(160, scene->height() - 35), QSize(40, 35)},
         {"regular", QPoint(120, scene->height() - 50), QSize(40, 50)},
@@ -52,16 +51,25 @@ void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player)
     };
 
     for (const auto& textureData : textures) {
-        scene->addItem(TextureFactory::create(textureData.type, textureData.position, textureData.size));
+        ITexture* block = TextureFactory::create(textureData.type, textureData.position, textureData.size);
+        texturesObj.push_back(block);
+        block->setZValue(500);
+        scene->addItem(block);
     }
 
     for (const auto& enemyData : enemies) {
-        scene->addItem(new Enemy(scene, enemyData.position, enemyData.size, enemyData.hp, enemyData.img, player));
+        Enemy* enemy = new Enemy(scene, enemyData.position, enemyData.size, enemyData.hp, enemyData.img, player);
+        enemyObj.push_back(enemy);
+        enemy->setZValue(500);
+        scene->addItem(enemy);
     }
 
     enemySpawnTimer = new QTimer(0);
-    QObject::connect(enemySpawnTimer, &QTimer::timeout, enemySpawnTimer, [scene, player]() {
-        scene->addItem(new Enemy(scene, QPoint(615, 0), QSize(50, 50), 1, ":/img/enemy_type_1.png", player));
+    QObject::connect(enemySpawnTimer, &QTimer::timeout, enemySpawnTimer, [this, scene, player]() {
+        Enemy* enemy = new Enemy(scene, QPoint(615, 0), QSize(50, 50), 1, ":/img/enemy_type_1.png", player);
+        enemyObj.push_back(enemy);
+        enemy->setZValue(500);
+        scene->addItem(enemy);
     });
 
     enemySpawnTimer->start(TIME_RESET_MOB);
@@ -70,4 +78,16 @@ void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player)
 QTimer* ThirdLevel::getTimer()
 {
     return enemySpawnTimer;
+}
+
+void ThirdLevel::deleteUi() {
+    for (const auto& textureData : texturesObj) {
+        if (textureData) delete textureData;
+    }
+    texturesObj.resize(0);
+
+    for (const auto& enemyData : enemyObj) {
+        if (enemyData) delete enemyData;
+    }
+    enemyObj.resize(0);
 }

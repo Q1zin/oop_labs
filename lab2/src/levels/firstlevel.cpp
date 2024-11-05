@@ -1,4 +1,5 @@
 #include <QGraphicsScene>
+#include "include/textures/itexture.h"
 #include "include/levels/firstlevel.h"
 #include "include/entities/player.h"
 #include "include/managers/texturefactory.h"
@@ -31,6 +32,16 @@ void FirstLevel::loadLevel(QGraphicsScene *scene, Player* player) {
     };
 
     for (const auto& textureData : textures) {
-        scene->addItem(TextureFactory::create(textureData.type, textureData.position, textureData.size));
+        ITexture* block = TextureFactory::create(textureData.type, textureData.position, textureData.size);
+        texturesObj.push_back(block);
+        block->setZValue(500);
+        scene->addItem(block);
     }
+}
+
+void FirstLevel::deleteUi() {
+    for (const auto& textureData : texturesObj) {
+        if (textureData) delete textureData;
+    }
+    texturesObj.resize(0);
 }

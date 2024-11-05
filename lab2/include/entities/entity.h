@@ -26,24 +26,40 @@ public:
 
     ~Entity();
 
+    int getDirection() const;
+    QPointF getSpeed() const;
+    int getYJumpProgress() const;
+    int getStateJump() const;
+    int getCountJump() const;
+    MovementAllowance getAllowedMovement() const;
+
+    void setDirection(int direction_);
+    void setSpeed(const QPointF& speed_);
+    void setYJumpProgress(int progress);
+    void setStateJump(int state);
+    void setCountJump(int count);
+    void setAllowedMovement(const MovementAllowance& movement);
+
+
 protected:
     void updataAllowedMovement();
     void move();
     void logicJump();
     void jump();
     void flip(Direction position);
-
     QGraphicsScene* scene;
-    int direction = 1; // 0 - left, 1 - right
-    QPointF speed = {0 ,0};
-    int y_jump_progress = 0;
-    int state_jump = 0;
-    int count_jump = 0;
-    MovementAllowance allowedMovement = {0, 0, 0, 0};
 
 private:
     void updateAllowedY();
     void updateAllowedX();
+
+    QPointF speed = {0 ,0};
+    MovementAllowance allowedMovement = {0, 0, 0, 0};
+    int direction = 1; // 0 - left, 1 - right
+    int y_jump_progress = 0;
+    int state_jump = 0;
+    int count_jump = 0;
+
 };
 
 

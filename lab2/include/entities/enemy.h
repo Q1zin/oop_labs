@@ -17,8 +17,10 @@ public:
     ~Enemy();
 
     int type() const override;
-
     enum { Type = UserType + 2 };
+
+    int getHp();
+    void setHp(int hp_);
 
 public slots:
     void checkBlock();

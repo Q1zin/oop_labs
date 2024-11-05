@@ -21,13 +21,14 @@ Bullet::Bullet(QPointF initPos, int direction)
     setPos(initPos);
 }
 
+Bullet::~Bullet() {}
 
-void Bullet::advance(int phase)
-{
+
+void Bullet::advance(int phase) {
     if (phase) {
         moveBy(x_speed, 0);
         if (data(0).toBool()){
-            delete this;
+            emit clearBullet(this);
         }
     } else {
         foreach (QGraphicsItem* item, collidingItems()) {
@@ -38,7 +39,7 @@ void Bullet::advance(int phase)
         }
 
         if (x() < 0 || x() + BULLET_LENGTH > scene()->width()){
-            delete this;
+            emit clearBullet(this);
         }
     }
 }

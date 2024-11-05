@@ -17,6 +17,7 @@ public:
     int getBestTime(int lvl) const;
     void pauseEnemySpawning(int lvl);
     void resumeEnemySpawning(int lvl);
+    void deleteUi(int lvl);
 
 private:
     std::vector<std::unique_ptr<Level>> levels;

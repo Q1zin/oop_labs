@@ -16,6 +16,7 @@ public:
 public slots:
     void setSoundCoin();
     void setSoundShot();
+    void playSound(const QString& source, int loops, QMediaPlayer* musicPlayer);
 
 private:
     std::unique_ptr<QMediaPlayer> musicPlayer;

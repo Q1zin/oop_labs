@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 
 #include "include/entities/entity.h"
+#include "include/entities/bullet.h"
 
 class Player : public Entity
 {
@@ -31,7 +32,9 @@ protected:
     void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
+    void onClearBullet(Bullet* bullet);
     int countCoins = 0;
+    std::vector<Bullet*> bulletObj;
 };
 
 #endif // PLAYER_H

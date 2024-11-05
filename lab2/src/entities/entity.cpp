@@ -23,6 +23,30 @@ Entity::Entity() : QObject(0), QGraphicsPixmapItem(0) {}
 
 Entity::~Entity() {}
 
+int Entity::getDirection() const { return direction; }
+
+QPointF Entity::getSpeed() const { return speed; }
+
+int Entity::getYJumpProgress() const { return y_jump_progress; }
+
+int Entity::getStateJump() const { return state_jump; }
+
+int Entity::getCountJump() const { return count_jump; }
+
+MovementAllowance Entity::getAllowedMovement() const { return allowedMovement; }
+
+void Entity::setDirection(int direction_) { direction = direction_; }
+
+void Entity::setSpeed(const QPointF &speed_) { speed = speed_; }
+
+void Entity::setYJumpProgress(int progress) { y_jump_progress = progress; }
+
+void Entity::setStateJump(int state) { state_jump = state; }
+
+void Entity::setCountJump(int count) { count_jump = count; }
+
+void Entity::setAllowedMovement(const MovementAllowance &movement) { allowedMovement = movement; }
+
 void Entity::updataAllowedMovement()
 {
     updateAllowedX();
@@ -66,8 +90,7 @@ void Entity::updateAllowedX() {
         dist_right = scene->width() - x() - pixmap().width();
     }
 
-    allowedMovement.left = dist_left - 2;
-    allowedMovement.right = dist_right - 2;
+    setAllowedMovement({dist_left - 2, dist_right - 2, getAllowedMovement().up, getAllowedMovement().down});
 }
 
 void Entity::updateAllowedY() {
@@ -107,90 +130,83 @@ void Entity::updateAllowedY() {
         dist_down = scene->height() - y() - pixmap().height();
     }
 
-    allowedMovement.up = dist_up - 2;
-    allowedMovement.down = dist_down - 2;
+    setAllowedMovement({getAllowedMovement().left, getAllowedMovement().right, dist_up - 2, dist_down - 2});
 }
 
-void Entity::move()
-{
-    if (speed.x() > 0) {
-        if (allowedMovement.right > speed.x()) {
-            moveBy(speed.x(), 0);
-        } else if (allowedMovement.right != 0) {
-            moveBy(allowedMovement.right, 0);
+void Entity::move() {
+    if (getSpeed().x() > 0) {
+        if (getAllowedMovement().right > getSpeed().x()) {
+            moveBy(getSpeed().x(), 0);
+        } else if (getAllowedMovement().right != 0) {
+            moveBy(getAllowedMovement().right, 0);
         }
-    } else if (speed.x() < 0) {
-        if (allowedMovement.left > std::abs(speed.x())) {
-            moveBy(speed.x(), 0);
-        } else if (allowedMovement.left != 0) {
-            moveBy(-allowedMovement.left, 0);
+    } else if (getSpeed().x() < 0) {
+        if (getAllowedMovement().left > std::abs(getSpeed().x())) {
+            moveBy(getSpeed().x(), 0);
+        } else if (getAllowedMovement().left != 0) {
+            moveBy(-getAllowedMovement().left, 0);
         }
     }
 }
 
-void Entity::jump()
-{
-    if ((count_jump == 0 && allowedMovement.down != 0) || (count_jump == 1)) {
-        state_jump = 2;
-        y_jump_progress = 0;
-    } else if (count_jump == 0) {
-        state_jump = 1;
-        y_jump_progress = 0;
+void Entity::jump() {
+    if ((getCountJump() == 0 && getAllowedMovement().down != 0) || (getCountJump() == 1)) {
+        setStateJump(2);
+        setYJumpProgress(0);
+    } else if (getCountJump() == 0) {
+        setStateJump(1);
+        setYJumpProgress(0);
     }
 }
 
 void Entity::logicJump() {
-    if (state_jump != 1 && state_jump != 2) {
-        speed.setY(speed.y() + GRAVITY);
-
-        if (allowedMovement.down >= speed.y()) {
-            moveBy(0, speed.y());
+    if (getStateJump() != 1 && getStateJump() != 2) {
+        setSpeed(QPointF(getSpeed().x(), getSpeed().y() + GRAVITY));
+        if (getAllowedMovement().down >= getSpeed().y()) {
+            moveBy(0, getSpeed().y());
         } else {
-            moveBy(0, allowedMovement.down);
-            state_jump = 0;
-            count_jump = 0;
-            speed.setY(0);
+            moveBy(0, getAllowedMovement().down);
+            setStateJump(0);
+            setCountJump(0);
+            setSpeed(QPointF(getSpeed().x(), 0));
         }
-    } else if (state_jump == 1) {
-        count_jump = 1;
-
-        if (y_jump_progress < MAX_JUMP_HEIGHT) {
-            y_jump_progress += JUMP_FORCE;
-            if (allowedMovement.up >= JUMP_FORCE) {
+    } else if (getStateJump() == 1) {
+        setCountJump(1);
+        if (getYJumpProgress() < MAX_JUMP_HEIGHT) {
+            setYJumpProgress(getYJumpProgress() + JUMP_FORCE);
+            if (getAllowedMovement().up >= JUMP_FORCE) {
                 moveBy(0, -JUMP_FORCE);
             } else {
-                state_jump = 0;
+                setStateJump(0);
             }
         } else {
-            state_jump = 0;
+            setStateJump(0);
         }
-    } else if (state_jump == 2) {
-        count_jump = 2;
-
-        if (y_jump_progress < MAX_JUMP_HEIGHT) {
-            y_jump_progress += JUMP_FORCE;
-            if (allowedMovement.up >= JUMP_FORCE) {
+    } else if (getStateJump() == 2) {
+        setCountJump(2);
+        if (getYJumpProgress() < MAX_JUMP_HEIGHT) {
+            setYJumpProgress(getYJumpProgress() + JUMP_FORCE);
+            if (getAllowedMovement().up >= JUMP_FORCE) {
                 moveBy(0, -JUMP_FORCE);
             } else {
-                state_jump = 0;
+                setStateJump(0);
             }
         } else {
-            state_jump = 0;
+            setStateJump(0);
         }
     }
 }
 
-void Entity::flip(Direction position)
-{
-    if (position == Right && direction == 0) {
+void Entity::flip(Direction position) {
+    if (position == Right && getDirection() == 0) {
         QTransform transform;
         transform.scale(-1, 1);
         setPixmap(pixmap().transformed(transform));
-        direction = 1;
-    } else if (position == Left && direction == 1) {
+        setDirection(1);
+    } else if (position == Left && getDirection() == 1) {
         QTransform transform;
         transform.scale(-1, 1);
         setPixmap(pixmap().transformed(transform));
-        direction = 0;
+        setDirection(0);
     }
 }

@@ -16,6 +16,7 @@ Timer::Timer(QGraphicsScene* scene, const QPoint& position)
 
 Timer::~Timer() {
     stop();
+    disconnect(timer, &QTimer::timeout, this, &Timer::updateTime);
 }
 
 void Timer::stop()

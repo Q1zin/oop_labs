@@ -18,8 +18,7 @@ struct EnemyData {
     QString img;
 };
 
-void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player)
-{
+void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     std::vector<TextureData> textures = {
         {"regular", QPoint(160, scene->height() - 35), QSize(40, 35)},
         {"regular", QPoint(120, scene->height() - 50), QSize(40, 50)},
@@ -35,9 +34,9 @@ void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player)
         {"regular", QPoint(1000, 460), QSize(280, 80)},
         {"regular", QPoint(910, 540), QSize(370, 80)},
         {"regular", QPoint(720, 620), QSize(560, 80)},
-        {"coin", QPoint(75, 110), QSize()},  // Размер для монет не указан, предполагается по умолчанию
-        {"coin", QPoint(125, 355), QSize()},
-        {"coin", QPoint(1205, 400), QSize()}
+        {"coin", QPoint(75, 110)},  // Размер для монет не указан, предполагается по умолчанию
+        {"coin", QPoint(125, 355)},
+        {"coin", QPoint(1205, 400)}
     };
 
     std::vector<EnemyData> enemies = {
@@ -48,10 +47,30 @@ void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player)
     };
 
     for (const auto& textureData : textures) {
-        scene->addItem(TextureFactory::create(textureData.type, textureData.position, textureData.size));
+        ITexture* block = TextureFactory::create(textureData.type, textureData.position, textureData.size);
+        texturesObj.push_back(block);
+        block->setZValue(500);
+        scene->addItem(block);
     }
 
     for (const auto& enemyData : enemies) {
-        scene->addItem(new Enemy(scene, enemyData.position, enemyData.size, enemyData.hp, enemyData.img, player));
+        Enemy* enemy = new Enemy(scene, enemyData.position, enemyData.size, enemyData.hp, enemyData.img, player);
+        enemyObj.push_back(enemy);
+        enemy->setZValue(500);
+        scene->addItem(enemy);
     }
+}
+
+void SecondLevel::deleteUi() {
+    for (const auto& textureData : texturesObj) {
+        if (textureData) delete textureData;
+    }
+    texturesObj.resize(0);
+
+    for (const auto& enemyData : enemyObj) {
+        if (enemyData) {
+            delete enemyData;
+        }
+    }
+    enemyObj.resize(0);
 }

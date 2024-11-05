@@ -16,8 +16,7 @@ Enemy::Enemy() : Entity(), victim(nullptr), hp(0) {
     HuntTimer = nullptr;
 }
 
-Enemy::~Enemy()
-{
+Enemy::~Enemy() {
     if (HuntTimer) {
         HuntTimer->stop();
         delete HuntTimer;
@@ -26,8 +25,8 @@ Enemy::~Enemy()
 
 void Enemy::advance(int phase) {
     if (phase) {
-        allowed_go_left_old = allowedMovement.left;
-        allowed_go_right_old = allowedMovement.right;
+        allowed_go_left_old = getAllowedMovement().left;
+        allowed_go_right_old = getAllowedMovement().right;
         updataAllowedMovement();
         move();
         logicJump();
@@ -35,9 +34,9 @@ void Enemy::advance(int phase) {
     } else {
         if (data(0).toBool()){
             setData(0, false);
-            hp -= 1;
-            if (hp <= 0) {
-                delete this;
+            setHp(getHp() - 1);
+            if (getHp() <= 0) {
+                this->hide();
                 return;
             }
         }
@@ -47,11 +46,11 @@ void Enemy::advance(int phase) {
 void Enemy::checkBlock(){
     qreal playerX = victim->x();
     if (std::abs(playerX - x()) < 5) {
-        speed.setX(0);
+        setSpeed(QPointF(0, getSpeed().y()));
         return;
     }
 
-    if (allowed_go_left_old == allowedMovement.left || allowed_go_right_old == allowedMovement.right) {
+    if (allowed_go_left_old == getAllowedMovement().left || allowed_go_right_old == getAllowedMovement().right) {
         jump();
     }
 }
@@ -61,19 +60,24 @@ int Enemy::type() const
     return Type;
 }
 
+int Enemy::getHp(){ return hp; }
+
+void Enemy::setHp(int hp_) { hp = hp_; }
+
+
 void Enemy::logicHunt() {
     qreal playerX = victim->x();
 
     if (std::abs(playerX - x()) < 5) {
-        speed.setX(0);
+        setSpeed(QPointF(0, getSpeed().y()));
         return;
     }
 
     if (x() < playerX) {
-        speed.setX(ENEMY_SPEED);
+        setSpeed(QPointF(ENEMY_SPEED, getSpeed().y()));
         flip(Left);
     } else if (x() > playerX) {
-        speed.setX(-ENEMY_SPEED);
+        setSpeed(QPointF(-ENEMY_SPEED, getSpeed().y()));
         flip(Right);
     }
 }

@@ -58,6 +58,11 @@ QTimer* LevelsSettings::getTimerLvl(int lvl) {
     return levels[lvl - 1]->getTimer();
 }
 
+void LevelsSettings::deleteUi(int lvl) {
+    if (lvl - 1 < 0 && lvl - 1 >= levels.size()) return;
+    levels[lvl - 1]->deleteUi();
+}
+
 void LevelsSettings::pauseEnemySpawning(int lvl) {
     QTimer* enemySpawnTimer = getTimerLvl(lvl);
     if (!enemySpawnTimer) return;

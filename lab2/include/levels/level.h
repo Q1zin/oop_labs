@@ -10,9 +10,11 @@ protected:
     int bestTime;
 public:
     Level();
+    virtual ~Level() = default;
 
     virtual void loadLevel(QGraphicsScene* scene, Player* player = nullptr) = 0;
     virtual QTimer* getTimer();
+    virtual void deleteUi();
     int getBestTime() const;
     void setBestTime(int time);
 };
