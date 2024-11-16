@@ -4,6 +4,7 @@
 #include "include/entities/enemy.h"
 #include "include/levels/levelssettings.h"
 #include "include/managers/texturefactory.h"
+#include "include/managers/enemyfactory.h"
 
 struct TextureData {
     QString type;
@@ -12,10 +13,8 @@ struct TextureData {
 };
 
 struct EnemyData {
+    EnemyType type;
     QPoint position;
-    QSize size;
-    int hp;
-    QString img;
 };
 
 void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player) {
@@ -40,10 +39,10 @@ void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     };
 
     std::vector<EnemyData> enemies = {
-        {QPoint(380, 650), QSize(50, 50), 1, ":/img/enemy_type_1.png"},
-        {QPoint(790, 570), QSize(50, 50), 1, ":/img/enemy_type_1.png"},
-        {QPoint(1130, 410), QSize(50, 50), 10, ":/img/enemy_type_2.png"},
-        {QPoint(1215, 25), QSize(50, 50), 10, ":/img/enemy_type_2.png"}
+        {EASY, QPoint(380, 650)},
+        {EASY, QPoint(790, 570)},
+        {MEDIUM, QPoint(1130, 410)},
+        {HARD, QPoint(1215, 25)}
     };
 
     for (const auto& textureData : textures) {
@@ -54,7 +53,7 @@ void SecondLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     }
 
     for (const auto& enemyData : enemies) {
-        Enemy* enemy = new Enemy(scene, enemyData.position, enemyData.size, enemyData.hp, enemyData.img, player);
+        Enemy* enemy = EnemyFactory::create(enemyData.type, scene, enemyData.position, player);
         enemyObj.push_back(enemy);
         enemy->setZValue(500);
         scene->addItem(enemy);

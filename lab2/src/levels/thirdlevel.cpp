@@ -7,6 +7,7 @@
 #include "include/entities/enemy.h"
 #include "include/levels/levelssettings.h"
 #include "include/managers/texturefactory.h"
+#include "include/managers/enemyfactory.h"
 
 #define TIME_RESET_MOB 5000
 
@@ -17,10 +18,8 @@ struct TextureData {
 };
 
 struct EnemyData {
+    EnemyType type;
     QPoint position;
-    QSize size;
-    int hp;
-    QString img;
 };
 
 void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
@@ -44,10 +43,10 @@ void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     };
 
     std::vector<EnemyData> enemies = {
-        {QPoint(980, 650), QSize(50, 50), 1, ":/img/enemy_type_1.png"},
-        {QPoint(690, 395), QSize(50, 50), 1, ":/img/enemy_type_1.png"},
-        {QPoint(305, 125), QSize(50, 50), 10, ":/img/enemy_type_2.png"},
-        {QPoint(1215, 24), QSize(50, 50), 10, ":/img/enemy_type_2.png"}
+        {EASY, QPoint(980, 650)},
+        {EASY, QPoint(690, 395)},
+        {MEDIUM,QPoint(305, 125)},
+        {MEDIUM, QPoint(1215, 24)}
     };
 
     for (const auto& textureData : textures) {
@@ -58,7 +57,7 @@ void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     }
 
     for (const auto& enemyData : enemies) {
-        Enemy* enemy = new Enemy(scene, enemyData.position, enemyData.size, enemyData.hp, enemyData.img, player);
+        Enemy* enemy = EnemyFactory::create(enemyData.type, scene, enemyData.position, player);
         enemyObj.push_back(enemy);
         enemy->setZValue(500);
         scene->addItem(enemy);
@@ -66,7 +65,7 @@ void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
 
     enemySpawnTimer = new QTimer(0);
     QObject::connect(enemySpawnTimer, &QTimer::timeout, enemySpawnTimer, [this, scene, player]() {
-        Enemy* enemy = new Enemy(scene, QPoint(615, 0), QSize(50, 50), 1, ":/img/enemy_type_1.png", player);
+        Enemy* enemy = EnemyFactory::create(HARD, scene, QPoint(615, 0), player);
         enemyObj.push_back(enemy);
         enemy->setZValue(500);
         scene->addItem(enemy);

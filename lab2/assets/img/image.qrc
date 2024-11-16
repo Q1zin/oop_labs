@@ -8,5 +8,6 @@
         <file>platform_start120x50.png</file>
         <file>platform_finish100x20.png</file>
         <file>invisible_finish_icon.png</file>
+        <file>enemy_type_3.png</file>
     </qresource>
 </RCC>

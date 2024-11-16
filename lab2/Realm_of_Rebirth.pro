@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/managers/enemyfactory.cpp \
     src/managers/gamecontroller.cpp \
     src/main.cpp \
     src/game.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
 
 
 HEADERS += \
+    include/managers/enemyfactory.h \
     include/managers/gamecontroller.h \
     include/game.h \
     include/managers/soundmanager.h \
