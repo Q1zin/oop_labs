@@ -1,4 +1,4 @@
-#include "gamecontroller.h"
+#include "include/managers/gamecontroller.h"
 
 GameController::GameController(QWidget *parent)
     : QWidget{parent} {

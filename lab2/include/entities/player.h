@@ -5,7 +5,7 @@
 
 #include "include/entities/entity.h"
 #include "include/entities/bullet.h"
-#include "gamecontroller.h"
+#include "include/managers/gamecontroller.h"
 
 class Player : public Entity
 {

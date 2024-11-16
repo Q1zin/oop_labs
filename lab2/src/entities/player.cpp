@@ -7,7 +7,7 @@
 #include "include/entities/bullet.h"
 #include "include/textures/coinstexture.h"
 #include "include/entities/enemy.h"
-#include "gamecontroller.h"
+#include "include/managers/gamecontroller.h"
 
 #define PLAYER_MOVE_SPEED 4
 
