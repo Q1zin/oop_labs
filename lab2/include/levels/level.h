@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include "include/entities/player.h"
+#include "include/managers/texturefactory.h"
 
 class Level {
 protected:
@@ -12,7 +13,7 @@ public:
     Level();
     virtual ~Level() = default;
 
-    virtual void loadLevel(QGraphicsScene* scene, Player* player = nullptr) = 0;
+    virtual void loadLevel(QGraphicsScene* scene, TextureFactory<ITexture, QString> textureFactory, Player* player = nullptr) = 0;
     virtual QTimer* getTimer();
     virtual void deleteUi();
     int getBestTime() const;

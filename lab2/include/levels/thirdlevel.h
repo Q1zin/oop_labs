@@ -9,7 +9,7 @@
 
 class ThirdLevel : public Level {
 public:
-    void loadLevel(QGraphicsScene* scene, Player* player = nullptr) override;
+    void loadLevel(QGraphicsScene* scene, TextureFactory<ITexture, QString> textureFactory, Player* player = nullptr) override;
     QTimer* getTimer() override;
     void deleteUi() override;
 

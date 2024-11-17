@@ -22,7 +22,7 @@ struct EnemyData {
     QPoint position;
 };
 
-void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
+void ThirdLevel::loadLevel(QGraphicsScene* scene, TextureFactory<ITexture, QString> textureFactory, Player* player) {
     std::vector<TextureData> textures = {
         {"regular", QPoint(160, scene->height() - 35), QSize(40, 35)},
         {"regular", QPoint(120, scene->height() - 50), QSize(40, 50)},
@@ -50,7 +50,7 @@ void ThirdLevel::loadLevel(QGraphicsScene *scene, Player *player) {
     };
 
     for (const auto& textureData : textures) {
-        ITexture* block = TextureFactory::create(textureData.type, textureData.position, textureData.size);
+        ITexture* block = textureFactory.Create(textureData.type, textureData.position, textureData.size);;
         texturesObj.push_back(block);
         block->setZValue(500);
         scene->addItem(block);

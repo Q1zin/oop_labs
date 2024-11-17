@@ -6,6 +6,7 @@
 #include "include/levels/firstlevel.h"
 #include "include/levels/secondlevel.h"
 #include "include/levels/thirdlevel.h"
+#include "include/managers/texturefactory.h"
 
 #define TIME_RESET_MOB 5000
 
@@ -26,9 +27,9 @@ void LevelsSettings::initializeLevels() {
     levels.push_back(std::make_unique<ThirdLevel>());
 }
 
-void LevelsSettings::loadLevel(int lvl, QGraphicsScene *scene, Player* player) {
+void LevelsSettings::loadLevel(int lvl, QGraphicsScene *scene, TextureFactory<ITexture, QString> textureFactory, Player* player) {
     if (lvl - 1 < 0 && lvl - 1 >= levels.size()) return;
-    levels[lvl - 1]->loadLevel(scene, player);
+    levels[lvl - 1]->loadLevel(scene, textureFactory, player);
     remainingTime = 0;
 }
 

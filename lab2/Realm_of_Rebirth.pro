@@ -13,10 +13,10 @@ SOURCES += \
     src/managers/gamecontroller.cpp \
     src/main.cpp \
     src/game.cpp \
+    src/managers/registertextures.cpp \
     src/managers/uimanager.cpp \
     src/managers/soundmanager.cpp \
     src/managers/scoremanager.cpp \
-    src/managers/texturefactory.cpp \
     src/textures/itexture.cpp \
     src/textures/coinstexture.cpp \
     src/textures/invisibletexture.cpp \
@@ -37,6 +37,7 @@ HEADERS += \
     include/managers/enemyfactory.h \
     include/managers/gamecontroller.h \
     include/game.h \
+    include/managers/registertextures.h \
     include/managers/soundmanager.h \
     include/managers/uimanager.h \
     include/managers/texturefactory.h \

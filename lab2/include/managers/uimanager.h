@@ -15,6 +15,7 @@
 #include "include/textures/invisibletexture.h"
 #include "include/textures/texture.h"
 #include "include/levels/levelssettings.h"
+#include "include/managers/texturefactory.h"
 
 struct PauseMenu {
     QPushButton* resumeButton = nullptr;
@@ -96,7 +97,6 @@ private:
     void setPause();
     void setUnpause();
 
-
     PauseMenu pauseMenu;
     LevelButtons levelButtons;
     GameWinMenu gameWinMenu;
@@ -109,6 +109,7 @@ private:
     QPushButton* createButton(const QString& text, const QPoint& position, const QSize& size = QSize(200, 50));
     QGraphicsTextItem* createText(const QString& text, const QPoint& position, const int size = 20);
     QGraphicsScene* scene;
+    TextureFactory<ITexture, QString> textureFactory;
     SoundManager* soundManager;
     LevelsSettings* levelSettings;
     QTimer* victoryCheckTimer;
@@ -119,9 +120,6 @@ private:
     bool in_game;
     bool in_pause;
     void clearUI();
-
-
-
 };
 
 #endif // UIMANAGER_H

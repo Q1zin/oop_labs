@@ -11,7 +11,7 @@ public:
     LevelsSettings();
 
     void initializeLevels();
-    void loadLevel(int lvl, QGraphicsScene* scene, Player* player = nullptr);
+    void loadLevel(int lvl, QGraphicsScene *scene, TextureFactory<ITexture, QString> textureFactory, Player* player = nullptr);
     void setBestTime(int lvl, int time);
     int getLevelsCount() const;
     int getBestTime(int lvl) const;

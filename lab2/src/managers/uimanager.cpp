@@ -16,6 +16,7 @@
 #include "include/levels/levelssettings.h"
 #include "include/textures/itexture.h"
 #include "include/managers/texturefactory.h"
+#include "include/managers/registertextures.h"
 
 UiManager::UiManager(QGraphicsScene* scene, SoundManager* soundManager)
     : scene(scene), soundManager(soundManager), victoryCheckTimer(nullptr), animationTimer(new QTimer(this)) {
@@ -25,6 +26,8 @@ UiManager::UiManager(QGraphicsScene* scene, SoundManager* soundManager)
 
     levelSettings = new LevelsSettings();
     lvl_count = levelSettings->getLevelsCount();
+
+    registerTextures(textureFactory);
 
     showMainMenu();
 }
@@ -355,7 +358,7 @@ void UiManager::showLevel() {
     if (levelElements.victoryZone) {
         levelElements.victoryZone->show();
     } else {
-        levelElements.victoryZone = TextureFactory::create("invisible", QPoint(scene->width() - 72, 6), QSize(64, 64), ":/img/invisible_finish_icon.png");
+        levelElements.victoryZone = textureFactory.Create("invisible", QPoint(scene->width() - 72, 6), QSize(64, 64), ":/img/invisible_finish_icon.png");
         levelElements.victoryZone->setZValue(500);
         scene->addItem(levelElements.victoryZone);
     }
@@ -363,14 +366,14 @@ void UiManager::showLevel() {
     if (levelElements.closeFinish) {
         levelElements.closeFinish->show();
     } else {
-        levelElements.closeFinish = TextureFactory::create("regular", QPoint(1180, 0), QSize(20, 76), ":/img/close_finish.png");
+        levelElements.closeFinish = textureFactory.Create("regular", QPoint(1180, 0), QSize(20, 76), ":/img/close_finish.png");
         levelElements.closeFinish->setZValue(500);
         scene->addItem(levelElements.closeFinish);
     }
 
     if (levelElements.textures.empty()) {
-        levelElements.textures.push_back(TextureFactory::create("regular", QPoint(scene->width() - 100, 76), QSize(100, 20), ":/img/platform_finish100x20.png"));
-        levelElements.textures.push_back(TextureFactory::create("regular", QPoint(0, scene->height() - 50), QSize(120, 50), ":/img/platform_start120x50.png"));
+        levelElements.textures.push_back(textureFactory.Create("regular", QPoint(scene->width() - 100, 76), QSize(100, 20), ":/img/platform_finish100x20.png"));
+        levelElements.textures.push_back(textureFactory.Create("regular", QPoint(0, scene->height() - 50), QSize(120, 50), ":/img/platform_start120x50.png"));
         for (ITexture* texture : levelElements.textures) {
             texture->setZValue(500);
             scene->addItem(texture);
@@ -379,7 +382,7 @@ void UiManager::showLevel() {
 
     startVictoryCheck();
 
-    levelSettings->loadLevel(lvl_now, scene, levelElements.player);
+    levelSettings->loadLevel(lvl_now, scene, textureFactory, levelElements.player);
 }
 
 void UiManager::hideLevel() {
