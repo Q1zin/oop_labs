@@ -19,6 +19,30 @@ public:
 template <typename T>
 class Subject {
 public:
+    Subject();
+    ~Subject();
+
+    void attach(std::shared_ptr<IObserver<T>> observer);
+    void detach(std::shared_ptr<IObserver<T>> observer);
+    void notify(const T& eventData);
+
+    void addData(T data);
+
+private:
+    class SubjectImpl;
+    std::unique_ptr<SubjectImpl> impl_;
+    T data_;
+};
+
+template<typename T>
+void Subject<T>::addData(T data) {
+    this->data_ = data;
+    notify(data);
+}
+
+template <typename T>
+class Subject<T>::SubjectImpl {
+public:
     void attach(std::shared_ptr<IObserver<T>> observer) {
         observers_.push_back(observer);
     }
@@ -35,15 +59,30 @@ public:
         }
     }
 
-    void addData(T data) {
-        this->data_ = data;
-        notify(data);
-    }
-
 private:
     std::list<std::shared_ptr<IObserver<T>>> observers_;
-    T data_;
 };
+
+template <typename T>
+Subject<T>::Subject() : impl_(std::make_unique<SubjectImpl>()), data_{} {}
+
+template <typename T>
+Subject<T>::~Subject() = default;
+
+template <typename T>
+void Subject<T>::attach(std::shared_ptr<IObserver<T>> observer) {
+    impl_->attach(observer);
+}
+
+template <typename T>
+void Subject<T>::detach(std::shared_ptr<IObserver<T>> observer) {
+    impl_->detach(observer);
+}
+
+template <typename T>
+void Subject<T>::notify(const T& eventData) {
+    impl_->notify(eventData);
+}
 
 template <typename T>
 class ConsoleObserver : public IObserver<T>, public std::enable_shared_from_this<ConsoleObserver<T>> {
@@ -104,9 +143,6 @@ public:
 
     ~LoggingObserver() {
         subject_->detach(this->shared_from_this());
-        if (file_.is_open()) {
-            file_.close();
-        }
     }
 
     void onEvent(const T& eventData) override {
@@ -138,9 +174,6 @@ public:
 
     ~LoggingObserver() {
         subject_->detach(this->shared_from_this());
-        if (file_.is_open()) {
-            file_.close();
-        }
     }
 
     void onEvent(const CustomEvent& eventData) override {
@@ -175,7 +208,7 @@ int main() {
     customObserverConsole->initialize();
     auto customLoggingObserver = std::make_shared<LoggingObserver<CustomEvent>>(customSubject, "log.txt");
     customLoggingObserver->initialize();
-    customSubject->addData({228, "payload_data"});
+    customSubject->addData({228, "payload_data =)"});
 
     return 0;
 }
