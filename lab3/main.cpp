@@ -34,6 +34,27 @@ private:
     T data_;
 };
 
+template <typename T>
+Subject<T>::Subject() : impl_(std::make_unique<SubjectImpl>()), data_{} {}
+
+template <typename T>
+Subject<T>::~Subject() = default;
+
+template <typename T>
+void Subject<T>::attach(std::shared_ptr<IObserver<T>> observer) {
+    impl_->attach(observer);
+}
+
+template <typename T>
+void Subject<T>::detach(std::shared_ptr<IObserver<T>> observer) {
+    impl_->detach(observer);
+}
+
+template <typename T>
+void Subject<T>::notify(const T& eventData) {
+    impl_->notify(eventData);
+}
+
 template<typename T>
 void Subject<T>::addData(T data) {
     this->data_ = data;
@@ -64,27 +85,6 @@ private:
 };
 
 template <typename T>
-Subject<T>::Subject() : impl_(std::make_unique<SubjectImpl>()), data_{} {}
-
-template <typename T>
-Subject<T>::~Subject() = default;
-
-template <typename T>
-void Subject<T>::attach(std::shared_ptr<IObserver<T>> observer) {
-    impl_->attach(observer);
-}
-
-template <typename T>
-void Subject<T>::detach(std::shared_ptr<IObserver<T>> observer) {
-    impl_->detach(observer);
-}
-
-template <typename T>
-void Subject<T>::notify(const T& eventData) {
-    impl_->notify(eventData);
-}
-
-template <typename T>
 class ConsoleObserver : public IObserver<T>, public std::enable_shared_from_this<ConsoleObserver<T>> {
 public:
     explicit ConsoleObserver(std::shared_ptr<Subject<T>> subject) : subject_(subject) {}
@@ -98,33 +98,21 @@ public:
     }
 
     void onEvent(const T& eventData) override {
-        std::cout << "ConsoleObserver: Event data = " << eventData << std::endl;
+        handleEvent(eventData);
     }
 
 private:
+    void handleEvent(const T& eventData) {
+        std::cout << "ConsoleObserver: Event data = " << eventData << std::endl;
+    }
+
     std::shared_ptr<Subject<T>> subject_;
 };
 
 template <>
-class ConsoleObserver<CustomEvent> : public IObserver<CustomEvent>, public std::enable_shared_from_this<ConsoleObserver<CustomEvent>> {
-public:
-    explicit ConsoleObserver(std::shared_ptr<Subject<CustomEvent>> subject) : subject_(subject) {}
-
-    void initialize() {
-        subject_->attach(this->shared_from_this());
-    }
-
-    ~ConsoleObserver() {
-        subject_->detach(this->shared_from_this());
-    }
-
-    void onEvent(const CustomEvent& eventData) override {
-        std::cout << "CustomEvent: { id: " << eventData.id << ", payload: " << eventData.payload << " }" << std::endl;
-    }
-
-private:
-    std::shared_ptr<Subject<CustomEvent>> subject_;
-};
+void ConsoleObserver<CustomEvent>::handleEvent(const CustomEvent& eventData) {
+    std::cout << "CustomEvent: { id: " << eventData.id << ", payload: " << eventData.payload << " }" << std::endl;
+}
 
 template <typename T>
 class LoggingObserver : public IObserver<T>, public std::enable_shared_from_this<LoggingObserver<T>> {
@@ -146,47 +134,27 @@ public:
     }
 
     void onEvent(const T& eventData) override {
+        handleEvent(eventData);
+    }
+
+private:
+    void handleEvent(const T& eventData) {
         if (file_.is_open()) {
             file_ << "LoggingObserver: Event data = " << eventData << std::endl;
         }
     }
 
-private:
     std::shared_ptr<Subject<T>> subject_;
     std::ofstream file_;
     std::string logFile_;
 };
 
 template <>
-class LoggingObserver<CustomEvent> : public IObserver<CustomEvent>, public std::enable_shared_from_this<LoggingObserver<CustomEvent>> {
-public:
-    explicit LoggingObserver(std::shared_ptr<Subject<CustomEvent>> subject, const std::string& logFile)
-        : subject_(subject), logFile_(logFile) {
-        file_.open(logFile_, std::ios::app);
-        if (!file_.is_open()) {
-            throw std::runtime_error("Unable to open log file");
-        }
+void LoggingObserver<CustomEvent>::handleEvent(const CustomEvent& eventData) {
+    if (file_.is_open()) {
+        file_ << "CustomEvent: { id: " << eventData.id << ", payload: " << eventData.payload << " }" << std::endl;
     }
-
-    void initialize() {
-        subject_->attach(this->shared_from_this());
-    }
-
-    ~LoggingObserver() {
-        subject_->detach(this->shared_from_this());
-    }
-
-    void onEvent(const CustomEvent& eventData) override {
-        if (file_.is_open()) {
-            file_ << "CustomEvent: { id: " << eventData.id << ", payload: " << eventData.payload << " }" << std::endl;
-        }
-    }
-
-private:
-    std::shared_ptr<Subject<CustomEvent>> subject_;
-    std::ofstream file_;
-    std::string logFile_;
-};
+}
 
 int main() {
     auto intSubject = std::make_shared<Subject<int>>();
