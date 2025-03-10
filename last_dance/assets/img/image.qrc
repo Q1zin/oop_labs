@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/image">
+        <file>enemy_type_1.png</file>
+        <file>enemy_type_2.png</file>
+        <file>close_finish.png</file>
+        <file>coin.png</file>
+        <file>man.png</file>
+        <file>platform_start120x50.png</file>
+        <file>platform_finish100x20.png</file>
+        <file>invisible_finish_icon.png</file>
+    </qresource>
+</RCC>

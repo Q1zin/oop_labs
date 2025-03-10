@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/music">
+        <file>music_win.mp3</file>
+        <file>collected_coin.mp3</file>
+        <file>music_game.mp3</file>
+        <file>laser.mp3</file>
+        <file>music_game_over.mp3</file>
+        <file>music_menu.mp3</file>
+    </qresource>
+</RCC>
